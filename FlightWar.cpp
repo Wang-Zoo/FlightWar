@@ -10,15 +10,15 @@
 #define _CLIENT_W 763
 #define _CLIENT_H 706
 
-
-int g_JetWidth = 36;
-int g_JetHeight = 46;
+int g_JetWidth = 45 - 1;
+int g_JetHeight = 54 - 0;
 int g_JetStartX = (_CLIENT_W - g_JetWidth)/2;
 int g_JetStartY = (_CLIENT_H - g_JetHeight-100);
 int g_dirState = 0;
 int g_actionTime = 0;
 std::vector<RECT> bullets;
-
+int g_JetStep = 15;
+int g_BulletStep = 40;
 
 
 HBITMAP hbmp[3];
@@ -223,21 +223,20 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		BitBlt(hdc, 0, bg1Y, _CLIENT_W, _CLIENT_H - bg1Y, bmpdc[0], 0, 0, SRCCOPY);
 		BitBlt(hdc, 0, 0, _CLIENT_W, bg2Y, bmpdc[0], 0, _CLIENT_H - bg2Y, SRCCOPY);
 		//绘制飞机
-		int step = 15;
-		if (GetAsyncKeyState('W') & 0x01) {
-			g_JetStartY -= step;
+		if (GetAsyncKeyState('W') & 0x8000) {
+			g_JetStartY -= g_JetStep;
 			if (g_JetStartY < 0) {
 				g_JetStartY = 0;
 			}
 		}
-		else if (GetAsyncKeyState('S') & 0x01) {
-			g_JetStartY += step;
+		else if (GetAsyncKeyState('S') & 0x8000) {
+			g_JetStartY += g_JetStep;
 			if (g_JetStartY > _CLIENT_H - g_JetHeight) {
 				g_JetStartY = _CLIENT_H - g_JetHeight;
 			}
 		}
-		if (GetAsyncKeyState('A') & 0x01) {
-			g_JetStartX -= step;
+		if (GetAsyncKeyState('A') & 0x8000) {
+			g_JetStartX -= g_JetStep;
 			if (g_JetStartX < 0) {
 				g_JetStartX = 0;
 			}
@@ -246,8 +245,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			g_JetWidth = 81 - 45;
 			g_JetHeight = 54 - 0;
 		}
-		else if (GetAsyncKeyState('D') & 0x01) {
-			g_JetStartX += step;
+		else if (GetAsyncKeyState('D') & 0x8000) {
+			g_JetStartX += g_JetStep;
 			if (g_JetStartX > _CLIENT_W - g_JetWidth) {
 				g_JetStartX = _CLIENT_W - g_JetWidth;
 			}
@@ -261,7 +260,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			g_JetHeight = 54 - 0;
 			g_dirState = 0;
 		}
-		if (GetAsyncKeyState('J') & 0x01) {
+		if (GetAsyncKeyState('J') & 0x8000) {
 			RECT rect;
 			rect = {// 1,1 ;11,32
 				g_JetStartX+(g_JetWidth - 11 + 1)/2,
@@ -292,8 +291,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		for (;it!=bullets.end();)
 		{
 			RECT &bullet = (*it);
-			bullet.top-=10;
-			bullet.bottom-=10;
+			bullet.top-= g_BulletStep;
+			bullet.bottom-= g_BulletStep;
 			if (bullet.bottom <= 0) {
 				it = bullets.erase(it);
 			}
