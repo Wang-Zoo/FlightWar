@@ -261,14 +261,26 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			g_dirState = 0;
 		}
 		if (GetAsyncKeyState('J') & 0x8000) {
-			RECT rect;
-			rect = {// 1,1 ;11,32
-				g_JetStartX+(g_JetWidth - 11 + 1)/2,
-				g_JetStartY-32-1,
-				g_JetStartX + (g_JetWidth - 11 + 1) / 2 +11-1,
-				g_JetStartY
-			};
-			bullets.push_back(rect);
+			{
+				RECT rect;
+				rect = {// 1,1 ;11,32
+					g_JetStartX ,
+					g_JetStartY - 32 - 1,
+					g_JetStartX + 11-1,
+					g_JetStartY
+				};
+				bullets.push_back(rect);
+			}
+			{
+				RECT rect;
+				rect = {// 1,1 ;11,32
+					g_JetStartX + g_JetWidth - 11+1,
+					g_JetStartY - 32 - 1,
+					g_JetStartX + g_JetWidth ,
+					g_JetStartY
+				};
+				bullets.push_back(rect);
+			}
 		}
 
 
