@@ -265,9 +265,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				RECT rect;
 				rect = {// 1,1 ;11,32
 					g_JetStartX ,
-					g_JetStartY - 32 - 1,
+					g_JetStartY ,
 					g_JetStartX + 11-1,
-					g_JetStartY
+					g_JetStartY + 32 - 1
 				};
 				bullets.push_back(rect);
 			}
@@ -275,9 +275,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				RECT rect;
 				rect = {// 1,1 ;11,32
 					g_JetStartX + g_JetWidth - 11+1,
-					g_JetStartY - 32 - 1,
+					g_JetStartY ,
 					g_JetStartX + g_JetWidth ,
-					g_JetStartY
+					g_JetStartY + 32 - 1
 				};
 				bullets.push_back(rect);
 			}
@@ -303,7 +303,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		for (;it!=bullets.end();)
 		{
 			RECT &bullet = (*it);
-			bullet.top-= g_BulletStep;
+			bullet.top-= g_BulletStep;  
 			bullet.bottom-= g_BulletStep;
 			if (bullet.bottom <= 0) {
 				it = bullets.erase(it);
