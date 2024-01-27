@@ -3,6 +3,7 @@
 
 #include "framework.h"
 #include "FlightWar.h"
+#include "vector"
 #pragma comment(lib, "msimg32.lib")
 
 #define MAX_LOADSTRING 100
@@ -16,9 +17,11 @@ int g_JetStartX = (_CLIENT_W - g_JetWidth)/2;
 int g_JetStartY = (_CLIENT_H - g_JetHeight-100);
 int g_dirState = 0;
 int g_actionTime = 0;
+std::vector<RECT> bullets;
 
 
-HBITMAP hbmp[2];
+
+HBITMAP hbmp[3];
 HWND hWnd;
 // 全局变量:
 HINSTANCE hInst;                                // 当前实例
@@ -38,6 +41,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
 	hbmp[0] = (HBITMAP)LoadImage(0, L"pic\\bg.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	hbmp[1] = (HBITMAP)LoadImage(0, L"pic\\jet_action.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+	hbmp[2] = (HBITMAP)LoadImage(0, L"pic\\bullet.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
@@ -196,14 +200,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 
 
-		HDC bmpdc[2];
+		HDC bmpdc[3];
 
 		//创建显示设备（兼容设备）
 		bmpdc[0] = CreateCompatibleDC(hdc);
 		bmpdc[1] = CreateCompatibleDC(hdc);
+		bmpdc[2] = CreateCompatibleDC(hdc);
 		HBITMAP oldbmp1 = (HBITMAP)SelectObject(bmpdc[0], hbmp[0]);
 		HBITMAP oldbmp2 = (HBITMAP)SelectObject(bmpdc[1], hbmp[1]);
-
+		HBITMAP oldbmp3 = (HBITMAP)SelectObject(bmpdc[2], hbmp[2]);
+		//绘制背景
 		static int bg1Y = 0;
 		static int bg2Y = 0;
 		bg1Y += 10;
@@ -216,86 +222,94 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 		BitBlt(hdc, 0, bg1Y, _CLIENT_W, _CLIENT_H - bg1Y, bmpdc[0], 0, 0, SRCCOPY);
 		BitBlt(hdc, 0, 0, _CLIENT_W, bg2Y, bmpdc[0], 0, _CLIENT_H - bg2Y, SRCCOPY);
-
-
+		//绘制飞机
+		int step = 15;
 		if (GetAsyncKeyState('W') & 0x01) {
-			g_JetStartY -= 30;
+			g_JetStartY -= step;
 			if (g_JetStartY < 0) {
 				g_JetStartY = 0;
 			}
 		}
 		else if (GetAsyncKeyState('S') & 0x01) {
-			g_JetStartY += 30;
+			g_JetStartY += step;
 			if (g_JetStartY > _CLIENT_H - g_JetHeight) {
 				g_JetStartY = _CLIENT_H - g_JetHeight;
 			}
 		}
 		if (GetAsyncKeyState('A') & 0x01) {
-			g_JetStartX -= 30;
+			g_JetStartX -= step;
 			if (g_JetStartX < 0) {
 				g_JetStartX = 0;
 			}
 			g_actionTime = 0;
 			g_dirState = 1;
+			g_JetWidth = 81 - 45;
+			g_JetHeight = 54 - 0;
 		}
 		else if (GetAsyncKeyState('D') & 0x01) {
-			g_JetStartX += 30;
+			g_JetStartX += step;
 			if (g_JetStartX > _CLIENT_W - g_JetWidth) {
 				g_JetStartX = _CLIENT_W - g_JetWidth;
 			}
 			g_actionTime = 0;
 			g_dirState = 2;
+			g_JetWidth = 117 - 81;
+			g_JetHeight = 54 - 0;
 		}
 		else {
+			g_JetWidth = 45 - 1;
+			g_JetHeight = 54 - 0;
 			g_dirState = 0;
+		}
+		if (GetAsyncKeyState('J') & 0x01) {
+			RECT rect;
+			rect = {// 1,1 ;11,32
+				g_JetStartX+(g_JetWidth - 11 + 1)/2,
+				g_JetStartY-32-1,
+				g_JetStartX + (g_JetWidth - 11 + 1) / 2 +11-1,
+				g_JetStartY
+			};
+			bullets.push_back(rect);
 		}
 
 
 		switch (g_dirState)
 		{
 		case 0:
-			TransparentBlt(hdc, g_JetStartX, g_JetStartY, 45 - 1, 54 - 0, bmpdc[1], 1, 0, 45 - 1, 54 - 0, RGB(13, 237, 13));
+			TransparentBlt(hdc, g_JetStartX, g_JetStartY, g_JetWidth,g_JetHeight, bmpdc[1], 1, 0, g_JetWidth, g_JetHeight, RGB(13, 237, 13));
 			break;
 		case 1:
-			TransparentBlt(hdc, g_JetStartX, g_JetStartY, 81 - 45, 54 - 0, bmpdc[1], 45, 0, 81 - 45, 54 - 0, RGB(13, 237, 13));
+			TransparentBlt(hdc, g_JetStartX, g_JetStartY, g_JetWidth, g_JetHeight, bmpdc[1], 45, 0, g_JetWidth, g_JetHeight, RGB(13, 237, 13));
 			break;
 		case 2:
-			TransparentBlt(hdc, g_JetStartX, g_JetStartY, 117 - 81, 54 - 0, bmpdc[1], 81, 0, 117 - 81, 54 - 0, RGB(13, 237, 13));
+			TransparentBlt(hdc, g_JetStartX, g_JetStartY, g_JetWidth, g_JetHeight, bmpdc[1], 81, 0, g_JetWidth, g_JetHeight, RGB(13, 237, 13));
 			break;
 		default:
 			break;
 		}
+		//绘制子弹
+		auto it = bullets.begin();
+		for (;it!=bullets.end();)
+		{
+			RECT &bullet = (*it);
+			bullet.top-=10;
+			bullet.bottom-=10;
+			if (bullet.bottom <= 0) {
+				it = bullets.erase(it);
+			}
+			else {
+				TransparentBlt(hdc, bullet.left, bullet.top, bullet.right-bullet.left, bullet.bottom-bullet.top, bmpdc[2], 1, 1, 11-1, 32-1, RGB(13, 237, 13));
+				it++;
+			}
+		}
 
-		//if (g_dirState) {
-		//	g_actionTime++;
-		//	if (g_actionTime > 5) {
-		//		g_actionTime = 0;
-		//		g_dirState = 0;
-		//	}
-		//}
-
-
-		//TransparentBlt(hdc, 0,0,_CLIENT_W, _CLIENT_H,bmpdc[0], 0,0,_CLIENT_W,_CLIENT_H, RGB(255, 255, 255));
-
-
-		//wchar_t buffer[50]; // 存储转换后的宽字符字符串
-		//swprintf_s(buffer, 50, L"%d", g_JetStartY); // 将整数转换为宽字符字符串
-		//LPCWSTR result = buffer; // 将宽字符字符串转换为 LPCWSTR 类型
-		//TextOut(hdc, 40, 100, result, wcslen(result));  
-
-		//int jetLeftWidth = 78 - 41;
-		//int jetLeftHeight = 50 - 7;
-		//TransparentBlt(hdc, 100, 200, jetLeftWidth, jetLeftHeight, bmpdc[0], 41, 7, jetLeftWidth, jetLeftHeight, RGB(13, 247, 13));
-
-		//int jetRightWidth = 116 - 86;
-		//int jetRightHeight = 52 - 9;
-		//TransparentBlt(hdc, 100, 300, jetRightWidth, jetRightHeight, bmpdc[0], 86, 9, jetRightWidth, jetRightHeight, RGB(13, 247, 13));
-
-		 //将老版位图选入并且删除
+		//将老版位图选入并且删除
 		SelectObject(bmpdc[0], oldbmp1);
 		DeleteObject(bmpdc[0]);
 		SelectObject(bmpdc[1], oldbmp2);
 		DeleteObject(bmpdc[1]);
+		SelectObject(bmpdc[2], oldbmp3);
+		DeleteObject(bmpdc[2]);
 
 		UpdateWindow(hWnd); // 刷新画布
 		EndPaint(hWnd, &ps);
