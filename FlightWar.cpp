@@ -3,9 +3,7 @@
 
 #include "framework.h"
 #include "FlightWar.h"
-#include "vector"
-#include "Output.h"
-#include "config.h"
+#include "Game.h"
 #pragma comment(lib, "msimg32.lib")
 
 #define MAX_LOADSTRING 100
@@ -72,9 +70,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	{
 		return FALSE;
 	}
-	COutput::getInstance()->Init(_CLIENT_W,_CLIENT_H,hWnd);
-	COutput::getInstance()->AddBmp(BMP_BG_PATH, BMP_BG);
-	COutput::getInstance()->AddPic(BMP_BG, KEY_BG,0,0,_CLIENT_W,_CLIENT_H, RGB(255, 0, 0));
+	GameInit(hWnd);
 
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
@@ -92,6 +88,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			DispatchMessage(&msg);
 		}
 	}
+	GameEnd();
 	KillTimer(hWnd, 0);
 	return (int)msg.wParam;
 }
@@ -121,9 +118,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_PAINT:
 		{
-			COutput::getInstance()->Begin();
-			COutput::getInstance()->Draw(KEY_BG,0,0);
-			COutput::getInstance()->End();
+		GameRun();
 		}
 		break;
 	case WM_TIMER:

@@ -27,10 +27,25 @@
     <ClInclude Include="FlightWar.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Output.h">
+    <ClInclude Include="tool\Output.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="config.h">
+    <ClInclude Include="tool\config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="manager\JetManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="object\Jet.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="object\UI.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="manager\UIManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,7 +53,28 @@
     <ClCompile Include="FlightWar.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Output.cpp">
+    <ClCompile Include="tool\Output.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="manager\JetManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="object\Jet.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Rect.h">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Rect.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="object\UI.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="manager\UIManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
