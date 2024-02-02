@@ -1,5 +1,6 @@
+#pragma once
 
-class CRECT
+class CRect
 {
 private:
 	int _x;
@@ -7,13 +8,13 @@ private:
 	int _w;
 	int _h;
 public:
-	CRECT();
-	~CRECT();
+	CRect();
+	~CRect();
 	const int& x = _x;
 	const int& y = _y;
 	const int& w = _w;
 	const int& h = _h;
 	void SetXY(int x, int y);
 	void SetWH(int w, int h);
-	bool Collision(CRECT* r);
+	bool Collision(CRect* r);
 };

@@ -8,7 +8,7 @@
 
 #define MAX_LOADSTRING 100
 
-HBITMAP hbmp[3];
+Game* g_Game = Game::getInstance();
 // 全局变量:
 HINSTANCE hInst;                                // 当前实例
 WCHAR szTitle[MAX_LOADSTRING];                  // 标题栏文本
@@ -70,7 +70,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	{
 		return FALSE;
 	}
-	GameInit(hWnd);
+	g_Game->Init(hWnd);
 
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
@@ -88,7 +88,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			DispatchMessage(&msg);
 		}
 	}
-	GameEnd();
+	g_Game->End();
 	KillTimer(hWnd, 0);
 	return (int)msg.wParam;
 }
@@ -118,7 +118,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_PAINT:
 		{
-		GameRun();
+		g_Game->Run();
 		}
 		break;
 	case WM_TIMER:

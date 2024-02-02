@@ -1,8 +1,8 @@
 #pragma once
 #include<vector>
 #include"object/UI.h"
-
-class CUIMANAGER
+#include"BaseManager.h"
+class CUIMANAGER:public CBASEMANAGER
 {
 public:
 	~CUIMANAGER();

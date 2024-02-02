@@ -1,0 +1,11 @@
+#include "BaseManager.h"
+
+CBASEMANAGER::CBASEMANAGER()
+{
+
+}
+
+CBASEMANAGER::~CBASEMANAGER()
+{
+
+}

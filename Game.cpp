@@ -1,25 +1,53 @@
 #include "Game.h"
 #include "manager/UIManager.h"
+#include "manager/JetManager.h"
 #include "tool/Output.h"
 #include "tool/config.h"
 
-void GameInit(HWND hWnd)
-{
-	COutput::getInstance()->Init(_CLIENT_W, _CLIENT_H, hWnd);
+Game* Game::gamep = 0;
 
-	CUIMANAGER::getInstance()->Init();
+Game::Game()
+{
 }
 
-void GameRun()
+Game::Game(const Game& that)
+{
+}
+
+Game* Game::getInstance()
+{
+	if (!gamep) {
+		gamep = new Game;
+	}
+	return gamep;
+}
+
+void Game::Init(HWND hWnd)
+{
+	COutput::getInstance()->Init(_CLIENT_W, _CLIENT_H, hWnd);
+	mList.push_back(CUIMANAGER::getInstance());
+	mList.push_back(CJETMANAGER::getInstance());
+
+	for (auto temp : mList) {
+		temp->Init();
+	}
+}
+
+void Game::Run()
 {
 	COutput::getInstance()->Begin();
 
-	CUIMANAGER::getInstance()->Run();
+	for (auto temp : mList) {
+		temp->Run();
+	}
 
 	COutput::getInstance()->End();
 }
 
-void GameEnd()
+void Game::End()
 {
-	CUIMANAGER::getInstance()->End();
+	for (auto temp : mList) {
+		temp->End();
+		delete temp;
+	}
 }

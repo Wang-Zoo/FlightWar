@@ -48,6 +48,9 @@
     <ClInclude Include="manager\UIManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="manager\BaseManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FlightWar.cpp">
@@ -65,16 +68,19 @@
     <ClCompile Include="object\Jet.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Rect.h">
+    <ClCompile Include="object\Rect.h">
       <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="Rect.cpp">
+    <ClCompile Include="object\Rect.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="object\UI.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="manager\UIManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="manager\BaseManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

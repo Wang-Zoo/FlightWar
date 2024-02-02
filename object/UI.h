@@ -10,7 +10,7 @@ public:
 	virtual void End() = 0;
 
 protected:
-	CRECT rect;
+	CRect* rect;
 };
 
 class  BACKGROUND:public CBASEUI

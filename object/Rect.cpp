@@ -1,6 +1,6 @@
 #include "Rect.h"
 
-CRECT::CRECT()
+CRect::CRect()
 {
 	_x = 0;
 	_y = 0;
@@ -8,24 +8,24 @@ CRECT::CRECT()
 	_h = 0;
 }
 
-CRECT::~CRECT()
+CRect::~CRect()
 {
 
 }
 
-void CRECT::SetXY(int x, int y)
+void CRect::SetXY(int x, int y)
 {
 	this->_x = x;
 	this->_y = y;
 }
 
-void CRECT::SetWH(int w, int h)
+void CRect::SetWH(int w, int h)
 {
 	this->_w = w;
 	this->_h = h;
 }
 
-bool CRECT::Collision(CRECT* r)
+bool CRect::Collision(CRect* r)
 {
 	if (!r)
 		return false;

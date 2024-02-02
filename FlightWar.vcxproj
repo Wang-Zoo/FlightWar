@@ -128,6 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="manager\BaseManager.h" />
     <ClInclude Include="tool\config.h" />
     <ClInclude Include="FlightWar.h" />
     <ClInclude Include="framework.h" />
@@ -143,11 +144,12 @@
   <ItemGroup>
     <ClCompile Include="FlightWar.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="manager\BaseManager.cpp" />
     <ClCompile Include="object\Jet.cpp" />
     <ClCompile Include="manager\JetManager.cpp" />
     <ClCompile Include="tool\Output.cpp" />
-    <ClCompile Include="Rect.cpp" />
-    <ClCompile Include="Rect.h" />
+    <ClCompile Include="object\Rect.cpp" />
+    <ClCompile Include="object\Rect.h" />
     <ClCompile Include="object\UI.cpp" />
     <ClCompile Include="manager\UIManager.cpp" />
   </ItemGroup>

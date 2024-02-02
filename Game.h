@@ -1,9 +1,18 @@
 #pragma once
 #include "Windows.h"
 #include "tool/config.h"
+#include "manager/BaseManager.h"
+#include "vector"
 
-void GameInit(HWND hWnd);
-
-void GameRun();
-
-void GameEnd();
+class Game {
+private:
+	Game();
+	Game(const Game& that);
+	static Game* gamep;
+	std::vector<CBASEMANAGER*> mList;
+public:
+	static Game* getInstance();
+	void Init(HWND hWnd);
+	void Run();
+	void End();
+};
