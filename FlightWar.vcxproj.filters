@@ -27,9 +27,18 @@
     <ClInclude Include="FlightWar.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Output.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FlightWar.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Output.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
