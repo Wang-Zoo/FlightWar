@@ -2,15 +2,21 @@
 #include "tool/Output.h"
 #include "tool/config.h"
 #include "object/Jet.h"
-
+#include "BulletManager.h"
 CJETMANAGER* CJETMANAGER::p = 0;
 
-CJETMANAGER* CJETMANAGER::getInstance()
+CJETMANAGER* CJETMANAGER::getInstance(CBulletAction* ba)
 {
 	if (!p) {
-		p = new CJETMANAGER;
+		p = new CJETMANAGER();
+		p->setBA(ba);
 	}
 	return p;
+}
+
+void CJETMANAGER::setBA(CBulletAction* ba)
+{
+	this->mBA = ba;
 }
 
 CJETMANAGER::CJETMANAGER()
@@ -24,7 +30,7 @@ CJETMANAGER::~CJETMANAGER()
 void CJETMANAGER::Init()
 {
 	COutput::getInstance()->AddBmp(BMP_JET_PATH, BMP_JET);
-	jets.push_back(new CMyJet);
+	jets.push_back(new CMyJet(mBA));
 	for (auto temp : jets)
 	{
 		temp->Init();

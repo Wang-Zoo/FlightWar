@@ -51,6 +51,12 @@
     <ClInclude Include="manager\BaseManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="object\Bullet.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="manager\BulletManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FlightWar.cpp">
@@ -81,6 +87,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="manager\BaseManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="object\Bullet.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="manager\BulletManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

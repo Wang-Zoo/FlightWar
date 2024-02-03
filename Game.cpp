@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "manager/UIManager.h"
 #include "manager/JetManager.h"
+#include "manager/BulletManager.h"
 #include "tool/Output.h"
 #include "tool/config.h"
 
@@ -26,7 +27,8 @@ void Game::Init(HWND hWnd)
 {
 	COutput::getInstance()->Init(_CLIENT_W, _CLIENT_H, hWnd);
 	mList.push_back(CUIMANAGER::getInstance());
-	mList.push_back(CJETMANAGER::getInstance());
+	mList.push_back(CBUllETMANAGER::getInstance());
+	mList.push_back(CJETMANAGER::getInstance(CBUllETMANAGER::getInstance()));
 
 	for (auto temp : mList) {
 		temp->Init();

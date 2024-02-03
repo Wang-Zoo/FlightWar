@@ -2,10 +2,13 @@
 #include "tool/Output.h"
 #include "tool/config.h"
 #include "object/Rect.h"
+#include "manager/BulletManager.h"
 
-CJet::CJet()
+CJet::CJet(CBulletAction* ba)
 {
 	horDir = 0;
+	mBulletAction = 0;
+	mBulletAction = ba;
 }
 
 CJet::~CJet()
@@ -13,7 +16,7 @@ CJet::~CJet()
 
 }     
 
-CMyJet::CMyJet():CJet()
+CMyJet::CMyJet(CBulletAction* ba):CJet(ba)
 {
 	mX = (_CLIENT_W - MY_JET_WIDTH) / 2;
 	mY = (_CLIENT_H - MY_JET_HEIGHT - 50);
@@ -34,30 +37,37 @@ void CMyJet::Init()
 
 void CMyJet::Run()
 {
-	if (GetAsyncKeyState('W')) {
+	if (GetAsyncKeyState('W') & 0x8000) {
 		mY-=step;
 		if (mY<0) {
 			mY = 0;
 		}
 	}
-	else if (GetAsyncKeyState('S')) {
+	else if (GetAsyncKeyState('S') & 0x8000) {
 		mY+=step;
 		if (mY > _CLIENT_H - MY_JET_HEIGHT) {
 			mY = _CLIENT_H - MY_JET_HEIGHT;
 		}
 	}
-	if (GetAsyncKeyState('A')) {
+	if (GetAsyncKeyState('A') & 0x8000) {
 		horDir = 1;
 		mX-=step;
 		if (mX < 0) {
 			mX = 0;
 		}
 	}
-	else if (GetAsyncKeyState('D')) {
+	else if (GetAsyncKeyState('D') & 0x8000) {
 		horDir = 2;
 		mX+= step;
 		if (mX > _CLIENT_W-MY_JET_WIDTH) {
 			mX = _CLIENT_W - MY_JET_WIDTH;
+		}
+	}
+	if (GetAsyncKeyState('J')&0x8000) {
+		unsigned long long curTime = GetTickCount64();
+		if (curTime - mLastFireTime > 100) {
+			mLastFireTime = curTime;
+			mBulletAction->Add(new MyJetBulletNumOne(mX + (MY_JET_WIDTH - MY_BULLET_NUM_ONE_WIDTH) / 2, mY - MY_BULLET_NUM_ONE_HEIGHT));
 		}
 	}
 	else {

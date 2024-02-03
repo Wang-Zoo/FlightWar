@@ -1,9 +1,12 @@
 #pragma once
 #include "Rect.h"
+
+class CBulletAction;
+
 class CJet
 {
 public:
-	CJet();
+	CJet(CBulletAction* ba);
 	~CJet();
 	virtual void Init() = 0;
 	virtual void Run() = 0;
@@ -14,12 +17,14 @@ protected:
 	float mY;
 	float step;
 	int horDir;
+	CBulletAction* mBulletAction;
+	unsigned long long mLastFireTime;
 };
 
 class CMyJet:public CJet
 {
 public:
-	CMyJet();
+	CMyJet(CBulletAction* );
 	~CMyJet();
 
 private:

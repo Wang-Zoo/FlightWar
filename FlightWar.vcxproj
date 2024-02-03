@@ -129,6 +129,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="manager\BaseManager.h" />
+    <ClInclude Include="manager\BulletManager.h" />
+    <ClInclude Include="object\Bullet.h" />
     <ClInclude Include="tool\config.h" />
     <ClInclude Include="FlightWar.h" />
     <ClInclude Include="framework.h" />
@@ -145,6 +147,8 @@
     <ClCompile Include="FlightWar.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="manager\BaseManager.cpp" />
+    <ClCompile Include="manager\BulletManager.cpp" />
+    <ClCompile Include="object\Bullet.cpp" />
     <ClCompile Include="object\Jet.cpp" />
     <ClCompile Include="manager\JetManager.cpp" />
     <ClCompile Include="tool\Output.cpp" />
