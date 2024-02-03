@@ -9,9 +9,11 @@ public:
 	virtual void Run() = 0;
 	virtual void End() = 0;
 protected:
-	CRect* rect;
+	CRect mRectP;
 	float mX;
 	float mY;
+	float step;
+	int horDir;
 };
 
 class CMyJet:public CJet

@@ -14,3 +14,7 @@
 #define KEY_MY_JET_LEFT "my_jet_left"
 #define KEY_MY_JET_RIGHT "my_jet_right"
 
+#define MY_JET_WIDTH 44
+#define MY_JET_HEIGHT 54
+#define MY_JET_LEFT_WIDTH 36
+
