@@ -37,6 +37,13 @@ void CMyJet::Init()
 
 void CMyJet::Run()
 {
+	if (GetAsyncKeyState('J') & 0x8000) {
+		unsigned long long curTime = GetTickCount64();
+		if (curTime - mLastFireTime > 100) {
+			mLastFireTime = curTime;
+			mBulletAction->Add(new MyJetBulletNumOne(mX + (MY_JET_WIDTH - MY_BULLET_NUM_ONE_WIDTH) / 2, mY - MY_BULLET_NUM_ONE_HEIGHT));
+		}
+	}
 	if (GetAsyncKeyState('W') & 0x8000) {
 		mY-=step;
 		if (mY<0) {
@@ -61,13 +68,6 @@ void CMyJet::Run()
 		mX+= step;
 		if (mX > _CLIENT_W-MY_JET_WIDTH) {
 			mX = _CLIENT_W - MY_JET_WIDTH;
-		}
-	}
-	if (GetAsyncKeyState('J')&0x8000) {
-		unsigned long long curTime = GetTickCount64();
-		if (curTime - mLastFireTime > 100) {
-			mLastFireTime = curTime;
-			mBulletAction->Add(new MyJetBulletNumOne(mX + (MY_JET_WIDTH - MY_BULLET_NUM_ONE_WIDTH) / 2, mY - MY_BULLET_NUM_ONE_HEIGHT));
 		}
 	}
 	else {
