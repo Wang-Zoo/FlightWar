@@ -8,7 +8,7 @@ public:
 	CBulletAction();
 	~CBulletAction();
 	virtual void Add(CBASEBULLET*) = 0;
-	virtual void fireBullet(int x, int y) = 0;
+	virtual void fireBullet(int x, int y,bool fire) = 0;
 };
 
 //·É»ú¹ÜÀíÆ÷
@@ -20,7 +20,7 @@ public:
 	void Run();
 	void End();
 	void Add(CBASEBULLET*);
-	void fireBullet(int x, int y);
+	void fireBullet(int x, int y,bool fire);
 	static CBUllETMANAGER* getInstance();
 private:
 	static CBUllETMANAGER* p;

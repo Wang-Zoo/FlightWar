@@ -48,10 +48,15 @@ void CBUllETMANAGER::Add(CBASEBULLET* bullet)
 	bullet->Init();
 }
 
-void CBUllETMANAGER::fireBullet(int x, int y)
+void CBUllETMANAGER::fireBullet(int x, int y,bool fire)
 {
 	MyJetBulletNumTwo* temp = dynamic_cast<MyJetBulletNumTwo*>(bullets[0]);
-	temp->setXY(x,y);
+	if (fire) {
+		temp->fire(x, y);
+	}
+	else {
+		temp->setXY(x, y);
+	}
 }
 
 CBUllETMANAGER* CBUllETMANAGER::getInstance()

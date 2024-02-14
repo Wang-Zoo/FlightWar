@@ -44,9 +44,7 @@ void CMyJet::Run()
 			mBulletAction->Add(new MyJetBulletNumOne(mX,mY));
 		}
 	}
-	if (GetAsyncKeyState('K') & 0x8000) {
-		mBulletAction->fireBullet(mX,mY);
-	}
+	mBulletAction->fireBullet(mX,mY, GetAsyncKeyState('K') & 0x8000);	
 	if (GetAsyncKeyState('W') & 0x8000) {
 		mY -= step;
 		if (mY < 0) {

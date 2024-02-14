@@ -25,10 +25,16 @@ public:
 };
 
 class MyJetBulletNumTwo :public CBASEBULLET {
+private:
+	int targetW;
+	int targetH;
+	bool accFlag;
+	unsigned long long mLastFireTime;
 public:
 	MyJetBulletNumTwo();
 	void Init();
 	void Run();
 	void End();
 	void setXY(int x, int y);
+	void fire(int x,int y);
 };

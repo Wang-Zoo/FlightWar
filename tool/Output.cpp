@@ -116,3 +116,17 @@ void COutput::Draw(const char* key, int x, int y, float sx, float sy)
 	PIC* pic = &it->second;
 	TransparentBlt(mBackHDC, x, y, pic->w * sx, pic->h * sy, pic->hdc, pic->offx, pic->offy, pic->w, pic->h, pic->c);
 }
+
+void COutput::Draw(const char* key, int x, int y, int targetW, int targetH)
+{
+	if (!key) {
+		return;
+	}
+	auto it = mPicMap.find(key);
+	if (it == mPicMap.end()) {
+		return;
+	}
+
+	PIC* pic = &it->second;
+	TransparentBlt(mBackHDC, x, y, targetW, targetH, pic->hdc, pic->offx, pic->offy, targetW, targetH, pic->c);
+}
