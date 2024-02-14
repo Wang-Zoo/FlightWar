@@ -23,3 +23,12 @@ public:
 	void Run();
 	void End();
 };
+
+class MyJetBulletNumTwo :public CBASEBULLET {
+public:
+	MyJetBulletNumTwo();
+	void Init();
+	void Run();
+	void End();
+	void setXY(int x, int y);
+};

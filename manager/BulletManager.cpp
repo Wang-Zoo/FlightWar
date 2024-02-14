@@ -11,6 +11,11 @@ CBUllETMANAGER::~CBUllETMANAGER()
 void CBUllETMANAGER::Init()
 {
 	COutput::getInstance()->AddBmp(BMP_BULLET_PATH, BMP_BULLET);
+	COutput::getInstance()->AddBmp(BMP_FIRE_BULLET_PATH, BMP_FIRE_BULLET);
+	//Ô¤Éè»ðÑæ×Óµ¯
+	CBASEBULLET * temp =  new MyJetBulletNumTwo;
+	temp->Init();
+	bullets.push_back(temp);
 }
 
 void CBUllETMANAGER::Run()
@@ -41,6 +46,12 @@ void CBUllETMANAGER::Add(CBASEBULLET* bullet)
 {
 	bullets.push_back(bullet);
 	bullet->Init();
+}
+
+void CBUllETMANAGER::fireBullet(int x, int y)
+{
+	MyJetBulletNumTwo* temp = dynamic_cast<MyJetBulletNumTwo*>(bullets[0]);
+	temp->setXY(x,y);
 }
 
 CBUllETMANAGER* CBUllETMANAGER::getInstance()
