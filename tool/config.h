@@ -8,7 +8,7 @@
 #define BMP_ENEMY_JET_PATH L"pic\\enemy_jet_action.bmp"
 #define BMP_ENEMY_BOSS_JET_PATH L"pic\\boss_jet_action.bmp"
 #define BMP_BULLET_PATH L"pic\\bullet.bmp"
-#define BMP_FIRE_BULLET_PATH L"pic\\fire_bullet.bmp"
+#define BMP_FIRE_BULLET_PATH L"pic\\fire_bullet_all.bmp"
 #define BMP_ENEMY_BULLET_PATH L"pic\\enemy_bullet.bmp"
 //±³¾°
 #define BMP_BG "background"
@@ -30,6 +30,7 @@
 #define BMP_ENEMY_BULLET "enemy_bullet"
 #define KEY_MY_BULLET_ONE_BG "bullet_my_one"
 #define KEY_MY_BULLET_TWO_BG "bullet_my_two"
+#define KEY_MY_BULLET_TWO_SMALL_BG "bullet_my_two_small"
 #define KEY_ENEMY_BULLET_RED_BG "bullet_enemy_red"
 #define KEY_ENEMY_BULLET_BLUE_BG "bullet_enemy_blue"
 #define KEY_ENEMY_BOSS_BULLET_BG "bullet_boss_enemy"

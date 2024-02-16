@@ -68,6 +68,8 @@ MyJetBulletNumTwo::MyJetBulletNumTwo() :CBASEBULLET(0, 0, MY_BULLET_NUM_TWO_WIDT
 void MyJetBulletNumTwo::Init()
 {
 	COutput::getInstance()->AddPic(BMP_FIRE_BULLET, KEY_MY_BULLET_TWO_BG, 9, 0, MY_BULLET_NUM_TWO_WIDTH, MY_BULLET_NUM_TWO_HEIGHT, RGB(13, 237, 13));
+	COutput::getInstance()->AddPic(BMP_FIRE_BULLET, KEY_MY_BULLET_TWO_SMALL_BG, 92, 0, MY_BULLET_NUM_TWO_WIDTH, MY_BULLET_NUM_TWO_HEIGHT, RGB(13, 237, 13));
+	smallFlag = false;
 }
 
 void MyJetBulletNumTwo::Run()
@@ -75,9 +77,14 @@ void MyJetBulletNumTwo::Run()
 	if (isDeaded) {
 		return;
 	}
-	COutput::getInstance()->Draw(KEY_MY_BULLET_TWO_BG, mX, mY, targetW, targetH);
+	COutput::getInstance()->Draw(smallFlag? KEY_MY_BULLET_TWO_BG:KEY_MY_BULLET_TWO_SMALL_BG, mX, mY, targetW, targetH);
 
 	unsigned long long curTime = GetTickCount64();
+	if (curTime - mLastSmallTime > 10) {
+		mLastSmallTime = curTime;
+		smallFlag = !smallFlag;
+	}
+
 	if (curTime - mLastFireTime > 50) {
 		accFlag = false;
 	}

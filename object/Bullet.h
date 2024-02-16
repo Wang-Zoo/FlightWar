@@ -32,6 +32,8 @@ private:
 	int targetH;
 	bool accFlag;
 	unsigned long long mLastFireTime;
+	unsigned long long mLastSmallTime;
+	bool smallFlag;
 public:
 	MyJetBulletNumTwo();
 	void Init();
