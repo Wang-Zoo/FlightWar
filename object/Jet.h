@@ -7,17 +7,21 @@ class CBulletAction;
 class CJet
 {
 public:
-	CJet(CBulletAction* ba);
+	CJet(CBulletAction* ba, int x, int y, int w, int h);
 	~CJet();
 	virtual void Init() = 0;
 	virtual void Run() = 0;
 	virtual void End() = 0;
+	bool collision(CRect* r);
+	bool isDead();
+	void dead();
 protected:
 	CRect mRectP;
 	float mX;
 	float mY;
 	float step;
 	int horDir;
+	bool isDeaded;
 	CBulletAction* mBulletAction;
 	unsigned long long mLastFireTime;
 };

@@ -1,7 +1,7 @@
 #include "BulletManager.h"
 #include "tool/Output.h"
 #include "tool/config.h"
-
+#include "JetManager.h"
 CBUllETMANAGER* CBUllETMANAGER::p = 0;
 
 CBUllETMANAGER::~CBUllETMANAGER()
@@ -22,6 +22,16 @@ void CBUllETMANAGER::Init()
 
 void CBUllETMANAGER::Run()
 {
+	for (auto temp:bullets)
+	{
+		if (temp->isDead()) {
+			continue;
+		}
+		bool collision = mJP->collision(temp->getRectP());
+		if (collision) {
+			temp->dead();
+		}
+	}
 	auto it = bullets.begin();
 	for (;it!=bullets.end();)
 	{
@@ -64,9 +74,14 @@ void CBUllETMANAGER::fireBullet(int x, int y,bool fire)
 CBUllETMANAGER* CBUllETMANAGER::getInstance()
 {
 	if (!p) {
-		p = new CBUllETMANAGER;
+		p = new CBUllETMANAGER();
 	}
 	return p;
+}
+
+void CBUllETMANAGER::setJetAction(CJetAction* jp)
+{
+	this->mJP = jp;
 }
 
 CBUllETMANAGER::CBUllETMANAGER()

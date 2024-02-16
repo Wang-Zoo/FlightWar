@@ -3,12 +3,14 @@
 class CBASEBULLET
 {
 public:
-	CBASEBULLET();
+	CBASEBULLET(int x, int y, int w, int h);
 	~CBASEBULLET();
 	virtual void Init() = 0;
 	virtual void Run() = 0;
 	virtual void End() = 0;
 	bool isDead();
+	void dead();
+	CRect* getRectP();
 protected:
 	CRect mRect;
 	float mX;

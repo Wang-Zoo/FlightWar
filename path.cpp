@@ -20,7 +20,7 @@ CMOVEPATH* CMOVEPATH::add(CPOS pos)
 bool CMOVEPATH::calculatePos(float* xp, float* yp)
 {
 	bool up = false;
-	float offset = 3.0f;
+	float offset = 0.3f;
 
 	if (index + 1 <= posList.size() - 1) {
 		CPOS temp = posList[index];

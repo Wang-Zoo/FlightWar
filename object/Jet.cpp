@@ -4,11 +4,16 @@
 #include "object/Rect.h"
 #include "manager/BulletManager.h"
 #include "tool/random.h"
-CJet::CJet(CBulletAction* ba)
+CJet::CJet(CBulletAction* ba,int x,int y,int w,int h)
 {
 	horDir = 0;
 	mBulletAction = 0;
 	mBulletAction = ba;
+	isDeaded = false;
+	mX = x;
+	mY = y;
+	mRectP.SetXY(x,y);
+	mRectP.SetWH(w,h);
 }
 
 CJet::~CJet()
@@ -16,10 +21,23 @@ CJet::~CJet()
 
 }
 
-CMyJet::CMyJet(CBulletAction* ba) :CJet(ba)
+bool CJet::collision(CRect* r)
 {
-	mX = (_CLIENT_W - MY_JET_WIDTH) / 2;
-	mY = (_CLIENT_H - MY_JET_HEIGHT - 50);
+	return mRectP.Collision(r);
+}
+
+bool CJet::isDead()
+{
+	return isDeaded;
+}
+
+void CJet::dead()
+{
+	isDeaded = true;
+}
+
+CMyJet::CMyJet(CBulletAction* ba) :CJet(ba, (_CLIENT_W - MY_JET_WIDTH) / 2, (_CLIENT_H - MY_JET_HEIGHT - 50),MY_JET_WIDTH,MY_JET_HEIGHT)
+{
 
 }
 
@@ -83,6 +101,7 @@ void CMyJet::Run()
 	else if (horDir == 2) {
 		COutput::getInstance()->Draw(KEY_MY_JET_RIGHT, mX, mY);
 	}
+	mRectP.SetXY(mX, mY);
 }
 
 void CMyJet::End()
@@ -91,18 +110,19 @@ void CMyJet::End()
 
 void EnemyJetNumOne::aiHorMove()
 {
+	float offset = 0.01f;
 	if (horStep == 0) {
-		horStep = getIntRange(-10, 10);
+		horStep = getIntRange(-20, 20);
 	}
 	if (horStep < 0) {
-		mX--;
+		mX-= offset;
 		horStep++;
 		if (mX < offsetX - 50) {
 			mX = offsetX - 50;
 		}
 	}
 	else if (horStep > 0) {
-		mX++;
+		mX+= offset;
 		horStep--;
 		if (mX > offsetX + 50) {
 			mX = offsetX + 50;
@@ -115,18 +135,19 @@ void EnemyJetNumOne::aiHorMove()
 
 void EnemyJetNumOne::aiVerMove()
 {
+	float offset = 0.01f;
 	if (verStep == 0) {
 		verStep = getIntRange(-20, 20);
 	}
 	if (verStep < 0) {
-		mY--;
+		mY-= offset;
 		verStep++;
 		if (mY < 100) {
 			mY = 100;
 		}
 	}
 	else if (verStep > 0) {
-		mY++;
+		mY+= offset;
 		verStep--;
 		if (mY > 200) {
 			mY = 200;
@@ -134,7 +155,7 @@ void EnemyJetNumOne::aiVerMove()
 		unsigned long long curTime = GetTickCount64();
 		if (curTime - lastAttckTime > 2000) {
 			lastAttckTime = curTime;
-			mBulletAction->Add(new EnemyJetBullet(mX, mY+ ENEMY_JET_HEIGHT));
+			//mBulletAction->Add(new EnemyJetBullet(mX, mY+ ENEMY_JET_HEIGHT));
 		}
 	}
 	else {
@@ -142,10 +163,8 @@ void EnemyJetNumOne::aiVerMove()
 	}
 }
 
-EnemyJetNumOne::EnemyJetNumOne(CBulletAction* ba,int offsetX) :CJet(ba)
+EnemyJetNumOne::EnemyJetNumOne(CBulletAction* ba,int offsetX) :CJet(ba,offsetX,0,ENEMY_JET_WIDTH,ENEMY_JET_HEIGHT)
 {
-	mX = offsetX;
-	mY = 0;
 	this->offsetX = offsetX;
 	leftDir = false;
 	upDir = false;
@@ -155,7 +174,7 @@ EnemyJetNumOne::EnemyJetNumOne(CBulletAction* ba,int offsetX) :CJet(ba)
 	lastTime = GetTickCount64();
 
 	{
-		CPOS pos(offsetX, mY);
+		CPOS pos(offsetX, 0);
 		path.add(pos);
 	}
 
@@ -190,18 +209,17 @@ void EnemyJetNumOne::Run()
 {
 
 	unsigned long long curTime = GetTickCount64();
-	if (curTime - lastTime > 1) {
-		lastTime = curTime;
-		if (!path.finish()) {
-			upDir = path.calculatePos(&mX, &mY);
-		}
-		else {
-			aiHorMove();
-			aiVerMove();
-			upDir = verStep < 0;
-		}
+	lastTime = curTime;
+	if (!path.finish()) {
+		upDir = path.calculatePos(&mX, &mY);
+	}
+	else {
+		aiHorMove();
+		aiVerMove();
+		upDir = verStep < 0;
 	}
 	COutput::getInstance()->Draw(upDir?KEY_ENEMY_JET_UP: KEY_ENEMY_JET_DOWN, mX, mY);
+	mRectP.SetXY(mX, mY);
 }
 
 void EnemyJetNumOne::End()
@@ -209,10 +227,9 @@ void EnemyJetNumOne::End()
 
 }
 
-EnemyJetBoss::EnemyJetBoss(CBulletAction* ba):CJet(ba)
+EnemyJetBoss::EnemyJetBoss(CBulletAction* ba):CJet(ba,300,100,ENEMY_BOSS_JET_WIDTH,ENEMY_BOSS_JET_HEIGHT)
 {
-	mX = 300;
-	mY = 100;
+	
 }
 
 EnemyJetBoss::~EnemyJetBoss()
@@ -251,7 +268,7 @@ void EnemyJetBoss::Run()
 		}
 	}
 	COutput::getInstance()->Draw(attackFlag?KEY_ENEMY_BOSS_JET_OPEN: KEY_ENEMY_BOSS_JET_CLOSE, mX, mY);
-	
+	mRectP.SetXY(mX, mY);
 }
 
 void EnemyJetBoss::End()

@@ -5,11 +5,10 @@
 #include "BulletManager.h"
 CJETMANAGER* CJETMANAGER::p = 0;
 
-CJETMANAGER* CJETMANAGER::getInstance(CBulletAction* ba)
+CJETMANAGER* CJETMANAGER::getInstance()
 {
 	if (!p) {
 		p = new CJETMANAGER();
-		p->setBA(ba);
 	}
 	return p;
 }
@@ -18,6 +17,23 @@ void CJETMANAGER::setBA(CBulletAction* ba)
 {
 	this->mBA = ba;
 }
+
+bool CJETMANAGER::collision(CRect* bulletP)
+{
+	for (auto temp : jets)
+	{
+		if (temp->isDead()) {
+			continue;
+		}
+		bool collision = temp->collision(bulletP);
+		if (collision) {
+			temp->dead();
+			return true;
+		}
+	}
+	return false;
+}
+
 
 CJETMANAGER::CJETMANAGER()
 {
@@ -43,9 +59,16 @@ void CJETMANAGER::Init()
 
 void CJETMANAGER::Run()
 {
-	for (auto temp : jets)
+	auto it = jets.begin();
+	for (;it!=jets.end();)
 	{
-		temp->Run();
+		if ((*it)->isDead()) {
+			it = jets.erase(it);
+		}
+		else {
+			(*it)->Run();
+			it++;
+		}
 	}
 	unsigned long long curTime = GetTickCount64();
 	if (!addFinish&&curTime - lastAddNewEnemyTime > 1000) {
@@ -53,8 +76,8 @@ void CJETMANAGER::Run()
 		EnemyJetNumOne* temp = new EnemyJetNumOne(mBA, startX);
 		temp->Init();
 		jets.push_back(temp);
-		startX -= 100;
-		if (startX <= 0) {
+		startX -= 150;
+		if (startX <= 100) {
 			addFinish = true;
 		}
 	}
@@ -67,4 +90,12 @@ void CJETMANAGER::End()
 		temp->End();
 		delete temp;
 	}
+}
+
+CJetAction::CJetAction()
+{
+}
+
+CJetAction::~CJetAction()
+{
 }

@@ -1,8 +1,14 @@
 #include "Bullet.h"
 #include "tool/Output.h"
 #include "tool/config.h"
-CBASEBULLET::CBASEBULLET()
+CBASEBULLET::CBASEBULLET(int x, int y, int w, int h)
 {
+	mX = x;
+	mY = y;
+
+	mRect.SetXY(x, y);
+	mRect.SetWH(w, h);
+
 	isDeaded = false;
 }
 
@@ -15,13 +21,22 @@ bool CBASEBULLET::isDead()
 	return isDeaded;
 }
 
-MyJetBulletNumOne::MyJetBulletNumOne(int x, int y) :CBASEBULLET()
+void CBASEBULLET::dead()
 {
-	mX = x + (MY_JET_WIDTH - MY_BULLET_NUM_ONE_WIDTH) / 2;
-	mY = y - MY_BULLET_NUM_ONE_HEIGHT;
+	isDeaded = true;
 }
 
-void MyJetBulletNumOne::Init()
+CRect* CBASEBULLET::getRectP()
+{
+	return &mRect;
+}
+
+MyJetBulletNumOne::MyJetBulletNumOne(int x, int y) :CBASEBULLET(x + (MY_JET_WIDTH - MY_BULLET_NUM_ONE_WIDTH) / 2, y - MY_BULLET_NUM_ONE_HEIGHT, MY_BULLET_NUM_ONE_WIDTH, MY_BULLET_NUM_ONE_HEIGHT)
+{
+
+}
+
+void MyJetBulletNumOne::Init()  
 {
 	COutput::getInstance()->AddPic(BMP_BULLET, KEY_MY_BULLET_ONE_BG, 1, 1, MY_BULLET_NUM_ONE_WIDTH, MY_BULLET_NUM_ONE_HEIGHT, RGB(13, 237, 13));
 }
@@ -32,20 +47,19 @@ void MyJetBulletNumOne::Run()
 		return;
 	}
 	COutput::getInstance()->Draw(KEY_MY_BULLET_ONE_BG, mX, mY);
-	mY -= 1;
+	mY -= 1.0f;
 	if (mY < 0) {
 		isDeaded = true;
 	}
+	mRect.SetXY(mX, mY);
 }
 
 void MyJetBulletNumOne::End()
 {
 }
 
-MyJetBulletNumTwo::MyJetBulletNumTwo()
+MyJetBulletNumTwo::MyJetBulletNumTwo() :CBASEBULLET(0, 0, MY_BULLET_NUM_TWO_WIDTH, MY_BULLET_NUM_TWO_HEIGHT)
 {
-	mX = 0;
-	mY = 0;
 	targetW = MY_BULLET_NUM_TWO_WIDTH;
 	targetH = 0;
 	accFlag = false;
@@ -74,6 +88,7 @@ void MyJetBulletNumTwo::Run()
 			mX = 0 - MY_BULLET_NUM_TWO_WIDTH;
 		}
 	}
+	mRect.SetXY(mX, mY);
 }
 
 void MyJetBulletNumTwo::End()
@@ -98,10 +113,8 @@ void MyJetBulletNumTwo::fire(int x, int y)
 	setXY(x, y);
 }
 
-EnemyJetBullet::EnemyJetBullet(int x,int y)
+EnemyJetBullet::EnemyJetBullet(int x,int y) :CBASEBULLET(x , y , ENEMY_BULLET_WIDTH, ENEMY_BULLET_HEIGHT)
 {
-	mX = x;
-	mY = y;
 	colorFlag = false;
 }
 
@@ -125,16 +138,16 @@ void EnemyJetBullet::Run()
 	if (!isDeaded) {
 		COutput::getInstance()->Draw(colorFlag ? KEY_ENEMY_BULLET_BLUE_BG : KEY_ENEMY_BULLET_RED_BG, mX, mY);
 	}
+	mRect.SetXY(mX, mY);
 }
 
 void EnemyJetBullet::End()
 {
 }
 
-EnemyBossJetBullet::EnemyBossJetBullet()
+EnemyBossJetBullet::EnemyBossJetBullet() :CBASEBULLET(100, 500, ENEMY_BOSS_BULLET_WIDTH, ENEMY_BOSS_BULLET_HEIGHT)
 {
-	mX = 100;
-	mY = 500;
+	
 }
 
 void EnemyBossJetBullet::Init()

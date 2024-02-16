@@ -26,9 +26,16 @@ Game* Game::getInstance()
 void Game::Init(HWND hWnd)
 {
 	COutput::getInstance()->Init(_CLIENT_W, _CLIENT_H, hWnd);
-	mList.push_back(CUIMANAGER::getInstance());
-	mList.push_back(CBUllETMANAGER::getInstance());
-	mList.push_back(CJETMANAGER::getInstance(CBUllETMANAGER::getInstance()));
+	CUIMANAGER* up = CUIMANAGER::getInstance();
+	CBUllETMANAGER* bp = CBUllETMANAGER::getInstance();
+	CJETMANAGER* jp = CJETMANAGER::getInstance();
+
+	bp->setJetAction(jp);
+	jp->setBA(bp);
+
+	mList.push_back(up);
+	mList.push_back(bp);
+	mList.push_back(jp);
 
 	for (auto temp : mList) {
 		temp->Init();
