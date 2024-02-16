@@ -97,3 +97,57 @@ void MyJetBulletNumTwo::fire(int x, int y)
 	accFlag = true;
 	setXY(x, y);
 }
+
+EnemyJetBullet::EnemyJetBullet(int x,int y)
+{
+	mX = x;
+	mY = y;
+	colorFlag = false;
+}
+
+void EnemyJetBullet::Init()
+{
+	COutput::getInstance()->AddPic(BMP_ENEMY_BULLET, KEY_ENEMY_BULLET_RED_BG, 56, 7, ENEMY_BULLET_WIDTH, ENEMY_BULLET_HEIGHT, RGB(13, 237, 13));
+	COutput::getInstance()->AddPic(BMP_ENEMY_BULLET, KEY_ENEMY_BULLET_BLUE_BG, 57, 38, ENEMY_BULLET_WIDTH, ENEMY_BULLET_HEIGHT, RGB(13, 237, 13));
+}
+
+void EnemyJetBullet::Run()
+{
+	unsigned long long curTime = GetTickCount64();
+	if (curTime - lastTime > 5) {
+		lastTime = curTime;
+		colorFlag = !colorFlag;
+		mY++;
+		if (mY >= _CLIENT_H - ENEMY_BULLET_HEIGHT) {
+			isDeaded = true;
+		}
+	}
+	if (!isDeaded) {
+		COutput::getInstance()->Draw(colorFlag ? KEY_ENEMY_BULLET_BLUE_BG : KEY_ENEMY_BULLET_RED_BG, mX, mY);
+	}
+}
+
+void EnemyJetBullet::End()
+{
+}
+
+EnemyBossJetBullet::EnemyBossJetBullet()
+{
+	mX = 100;
+	mY = 500;
+}
+
+void EnemyBossJetBullet::Init()
+{
+	COutput::getInstance()->AddPic(BMP_ENEMY_BULLET, KEY_ENEMY_BOSS_BULLET_BG, 7, 6, ENEMY_BOSS_BULLET_WIDTH, ENEMY_BOSS_BULLET_HEIGHT, RGB(13, 237, 13));
+}
+
+void EnemyBossJetBullet::Run()
+{
+	COutput::getInstance()->Draw(KEY_ENEMY_BOSS_BULLET_BG, mX, mY);
+
+}
+
+void EnemyBossJetBullet::End()
+{
+}

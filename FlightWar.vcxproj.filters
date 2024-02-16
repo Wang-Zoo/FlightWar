@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="object">
+      <UniqueIdentifier>{a4cc0c23-f1b7-4688-b42b-343722dac8b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -57,6 +60,12 @@
     <ClInclude Include="manager\BulletManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="tool\random.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="path.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FlightWar.cpp">
@@ -93,6 +102,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="manager\BulletManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="tool\random.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="path.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

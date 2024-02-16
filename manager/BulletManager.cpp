@@ -12,10 +12,12 @@ void CBUllETMANAGER::Init()
 {
 	COutput::getInstance()->AddBmp(BMP_BULLET_PATH, BMP_BULLET);
 	COutput::getInstance()->AddBmp(BMP_FIRE_BULLET_PATH, BMP_FIRE_BULLET);
+	COutput::getInstance()->AddBmp(BMP_ENEMY_BULLET_PATH, BMP_ENEMY_BULLET);
 	//Ô¤Éè»ðÑæ×Óµ¯
 	CBASEBULLET * temp =  new MyJetBulletNumTwo;
 	temp->Init();
 	bullets.push_back(temp);
+
 }
 
 void CBUllETMANAGER::Run()

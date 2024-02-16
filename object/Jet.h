@@ -1,5 +1,6 @@
 #pragma once
 #include "Rect.h"
+#include "path.h"
 
 class CBulletAction;
 
@@ -26,10 +27,42 @@ class CMyJet:public CJet
 public:
 	CMyJet(CBulletAction* );
 	~CMyJet();
-
-private:
 	void Init();
 	void Run();
 	void End();
 };
 
+class EnemyJetNumOne :public CJet {
+private:
+	int offsetX;
+	bool leftDir;
+	bool upDir;
+	int horStep;
+	int verStep;
+	CMOVEPATH path;
+	unsigned long long lastTime;
+	unsigned long long lastAttckTime;
+	void aiHorMove();
+	void aiVerMove();
+public:
+	EnemyJetNumOne(CBulletAction*,int);
+	~EnemyJetNumOne();
+	void Init();
+	void Run();
+	void End();
+};
+
+class EnemyJetBoss :public CJet {
+private:
+	unsigned long long lastAttackTime;
+	unsigned long long lastMoveTime;
+	bool attackFlag;
+	bool leftFlag;
+
+public:
+	EnemyJetBoss(CBulletAction*);
+	~EnemyJetBoss();
+	void Init();
+	void Run();
+	void End();
+};

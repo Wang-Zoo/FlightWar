@@ -38,3 +38,24 @@ public:
 	void setXY(int x, int y);
 	void fire(int x,int y);
 };
+
+class EnemyJetBullet :public CBASEBULLET {
+private:
+	bool colorFlag;
+	unsigned long long lastTime;
+public:
+	EnemyJetBullet(int x,int y);
+	void Init();
+	void Run();
+	void End();
+};
+
+class EnemyBossJetBullet :public CBASEBULLET {
+private:
+
+public:
+	EnemyBossJetBullet();
+	void Init();
+	void Run();
+	void End();
+};
