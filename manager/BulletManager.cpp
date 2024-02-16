@@ -14,10 +14,7 @@ void CBUllETMANAGER::Init()
 	COutput::getInstance()->AddBmp(BMP_FIRE_BULLET_PATH, BMP_FIRE_BULLET);
 	COutput::getInstance()->AddBmp(BMP_ENEMY_BULLET_PATH, BMP_ENEMY_BULLET);
 	//Ô¤Éè»ðÑæ×Óµ¯
-	CBASEBULLET * temp =  new MyJetBulletNumTwo;
-	temp->Init();
-	bullets.push_back(temp);
-
+	Add(new MyJetBulletNumTwo);
 }
 
 void CBUllETMANAGER::Run()
@@ -27,8 +24,9 @@ void CBUllETMANAGER::Run()
 		if (temp->isDead()) {
 			continue;
 		}
-		bool collision = mJP->collision(temp->getRectP());
-		if (collision) {
+		bool isAllen = dynamic_cast<MyJetBulletNumTwo*>(temp) || dynamic_cast<MyJetBulletNumOne*>(temp);
+		bool collision = mJP->collision(temp->getRectP(),!isAllen);
+		if (collision&& !dynamic_cast<MyJetBulletNumTwo*>(temp)) {
 			temp->dead();
 		}
 	}
@@ -62,12 +60,14 @@ void CBUllETMANAGER::Add(CBASEBULLET* bullet)
 
 void CBUllETMANAGER::fireBullet(int x, int y,bool fire)
 {
-	MyJetBulletNumTwo* temp = dynamic_cast<MyJetBulletNumTwo*>(bullets[0]);
-	if (fire) {
-		temp->fire(x, y);
-	}
-	else {
-		temp->setXY(x, y);
+	if (bullets.size()>0&& bullets[0] && dynamic_cast<MyJetBulletNumTwo*>(bullets[0])) {
+		MyJetBulletNumTwo* temp = dynamic_cast<MyJetBulletNumTwo*>(bullets[0]);
+		if (fire) {
+			temp->fire(x, y);
+		}
+		else {
+			temp->setXY(x, y);
+		}
 	}
 }
 

@@ -10,7 +10,7 @@ class CJetAction
 public:
 	CJetAction();
 	~CJetAction();
-	virtual bool collision(CRect*) = 0;
+	virtual bool collision(CRect*,bool) = 0;
 };
 
 //·É»ú¹ÜÀíÆ÷
@@ -23,7 +23,7 @@ public:
 	void End();
 	static CJETMANAGER* getInstance();
 	void setBA(CBulletAction* ba);
-	bool collision(CRect* bulletP);
+	bool collision(CRect* bulletP,bool isEnemy);
 
 private:
 	unsigned long long lastAddNewEnemyTime;
@@ -31,6 +31,7 @@ private:
 	CBulletAction* mBA;
 	int startX;
 	bool addFinish;
+	void Add(CJet*);
 	CJETMANAGER();
 	CJETMANAGER(const CJETMANAGER& that);
 	std::vector<CJet*> jets;
