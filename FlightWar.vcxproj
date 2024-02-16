@@ -146,6 +146,8 @@
     <ClInclude Include="tool\random.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="baozha.cpp" />
+    <ClCompile Include="baozha.h" />
     <ClCompile Include="FlightWar.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="manager\BaseManager.cpp" />

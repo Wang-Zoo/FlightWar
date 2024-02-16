@@ -10,9 +10,15 @@
 #define BMP_BULLET_PATH L"pic\\bullet.bmp"
 #define BMP_FIRE_BULLET_PATH L"pic\\fire_bullet_all.bmp"
 #define BMP_ENEMY_BULLET_PATH L"pic\\enemy_bullet.bmp"
+#define BMP_BAOZHA_PATH L"pic\\baozha.bmp"
 //±³¾°
 #define BMP_BG "background"
 #define KEY_BG "bg"
+//±¬Õ¨
+#define BMP_BAOZHA "baozha"
+#define KEY_BAOZHA_ONE "baozh_one"
+#define KEY_BAOZHA_TWO "baozh_two"
+#define KEY_BAOZHA_THERE "baozh_there"
 //·É»ú
 #define BMP_JET "jet_action"
 #define BMP_ENEMY_JET "jet_enemy_action"
@@ -48,10 +54,13 @@
 #define MY_BULLET_NUM_ONE_HEIGHT 31
 #define MY_BULLET_NUM_TWO_WIDTH 69
 #define MY_BULLET_NUM_TWO_HEIGHT 281
-//56 7     79 32       57 38 
 #define ENEMY_BULLET_WIDTH 23
 #define ENEMY_BULLET_HEIGHT 25
-//7 6      33 109
 #define ENEMY_BOSS_BULLET_WIDTH 26
 #define ENEMY_BOSS_BULLET_HEIGHT 103
-
+//±¬Õ¨
+#define BZ_WIDTH   73
+#define BZ_HEIGHT  73
+#define BZ_SMALL_WIDTH   43//112 37     155 74
+#define BZ_SMALL_HEIGHT  37
+//190 - 36         

@@ -36,6 +36,11 @@ void CJet::dead()
 	isDeaded = true;
 }
 
+bool CJet::canDestory()
+{
+	return isDeaded&&mBZ.finish();
+}
+
 CMyJet::CMyJet(CBulletAction* ba) :CJet(ba, (_CLIENT_W - MY_JET_WIDTH) / 2, (_CLIENT_H - MY_JET_HEIGHT - 50),MY_JET_WIDTH,MY_JET_HEIGHT)
 {
 
@@ -55,6 +60,10 @@ void CMyJet::Init()
 
 void CMyJet::Run()
 {
+	if (isDeaded) {
+		mBZ.show(mX,mY,MY_JET_WIDTH,MY_JET_HEIGHT);
+		return;
+	}
 	if (GetAsyncKeyState('J') & 0x8000) {
 		unsigned long long curTime = GetTickCount64();
 		if (curTime - mLastFireTime > 100) {
@@ -135,7 +144,7 @@ void EnemyJetNumOne::aiHorMove()
 
 void EnemyJetNumOne::aiVerMove()
 {
-	float offset = 0.01f;
+	float offset = 1.0f;
 	if (verStep == 0) {
 		verStep = getIntRange(-20, 20);
 	}
@@ -207,16 +216,24 @@ void EnemyJetNumOne::Init()
 
 void EnemyJetNumOne::Run()  
 {
+	if (isDeaded) {
+		mBZ.show(mX, mY,ENEMY_JET_WIDTH, ENEMY_JET_HEIGHT);
+		return;
+	}
 
-	unsigned long long curTime = GetTickCount64();
-	lastTime = curTime;
 	if (!path.finish()) {
 		upDir = path.calculatePos(&mX, &mY);
 	}
 	else {
-		aiHorMove();
-		aiVerMove();
-		upDir = verStep < 0;
+		unsigned long long curTime = GetTickCount64();
+
+		if (curTime - lastTime > 10) {
+			lastTime = curTime;
+			aiHorMove();
+			aiVerMove();
+			upDir = verStep < 0;
+		}
+
 	}
 	COutput::getInstance()->Draw(upDir?KEY_ENEMY_JET_UP: KEY_ENEMY_JET_DOWN, mX, mY);
 	mRectP.SetXY(mX, mY);

@@ -68,7 +68,7 @@ void CJETMANAGER::Run()
 	auto it = jets.begin();
 	for (;it!=jets.end();)
 	{
-		if ((*it)->isDead()) {
+		if ((*it)->canDestory()) {
 			delete(*it);
 			it = jets.erase(it);
 		}

@@ -1,6 +1,7 @@
 #pragma once
 #include "Rect.h"
 #include "path.h"
+#include "baozha.h"
 
 class CBulletAction;
 
@@ -15,7 +16,9 @@ public:
 	bool collision(CRect* r);
 	bool isDead();
 	void dead();
+	bool canDestory();
 protected:
+	CBAOZHA mBZ;
 	CRect mRectP;
 	float mX;
 	float mY;
