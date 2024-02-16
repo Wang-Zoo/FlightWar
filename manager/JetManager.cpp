@@ -61,6 +61,7 @@ void CJETMANAGER::Init()
 	addFinish = false;
 	startX = 500;
 	Add(new CMyJet(mBA));
+	Add(new EnemyJetBoss(mBA));
 }
 
 void CJETMANAGER::Run()

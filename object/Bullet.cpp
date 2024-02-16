@@ -152,7 +152,7 @@ void EnemyJetBullet::End()
 {
 }
 
-EnemyBossJetBullet::EnemyBossJetBullet() :CBASEBULLET(100, 500, ENEMY_BOSS_BULLET_WIDTH, ENEMY_BOSS_BULLET_HEIGHT)
+EnemyBossJetBullet::EnemyBossJetBullet(int x,int y) :CBASEBULLET(x,y, ENEMY_BOSS_BULLET_WIDTH, ENEMY_BOSS_BULLET_HEIGHT)
 {
 	
 }
@@ -164,6 +164,10 @@ void EnemyBossJetBullet::Init()
 
 void EnemyBossJetBullet::Run()
 {
+	mY+=0.1f;
+	if (mY > _CLIENT_H - ENEMY_BOSS_BULLET_HEIGHT) {
+		isDeaded = true;
+	}
 	COutput::getInstance()->Draw(KEY_ENEMY_BOSS_BULLET_BG, mX, mY);
 
 }

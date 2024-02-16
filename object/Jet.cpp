@@ -244,9 +244,17 @@ void EnemyJetNumOne::End()
 
 }
 
-EnemyJetBoss::EnemyJetBoss(CBulletAction* ba):CJet(ba,300,100,ENEMY_BOSS_JET_WIDTH,ENEMY_BOSS_JET_HEIGHT)
+EnemyJetBoss::EnemyJetBoss(CBulletAction* ba):CJet(ba, (_CLIENT_W - ENEMY_BOSS_JET_WIDTH) / 2, 0 - ENEMY_BOSS_JET_HEIGHT,ENEMY_BOSS_JET_WIDTH,ENEMY_BOSS_JET_HEIGHT)
 {
-	
+	{
+		CPOS pos((_CLIENT_W - ENEMY_BOSS_JET_WIDTH)/2, 0 - ENEMY_BOSS_JET_HEIGHT);
+		path.add(pos);
+	}
+
+	{
+		CPOS pos((_CLIENT_W - ENEMY_BOSS_JET_WIDTH) / 2, ENEMY_BOSS_JET_HEIGHT/2);
+		path.add(pos);
+	}
 }
 
 EnemyJetBoss::~EnemyJetBoss()
@@ -268,22 +276,31 @@ void EnemyJetBoss::Run()
 	if (curTime - lastAttackTime > 5000) {
 		attackFlag = !attackFlag;
 		lastAttackTime = curTime;
+		if (attackFlag) {
+			mBulletAction->Add(new EnemyBossJetBullet(mX+(ENEMY_BOSS_JET_WIDTH-ENEMY_BOSS_BULLET_WIDTH)/2, mY+ (ENEMY_BOSS_JET_HEIGHT - ENEMY_BOSS_BULLET_HEIGHT) / 2));
+		}
 	} 
-	if (curTime - lastMoveTime > 10) {
-		lastMoveTime = curTime;
-		if (mX > 400) {
-			leftFlag = true;
-		}
-		else if (mX < 200) {
-			leftFlag = false;
-		}
-		if (leftFlag) {
-			mX--;
-		}
-		else {
-			mX++;
+	if (!path.finish()) {
+		path.calculatePos(&mX, &mY);
+	}
+	else {
+		if (curTime - lastMoveTime > 10) {
+			lastMoveTime = curTime;
+			if (mX > 400) {
+				leftFlag = true;
+			}
+			else if (mX < 200) {
+				leftFlag = false;
+			}
+			if (leftFlag) {
+				mX--;
+			}
+			else {
+				mX++;
+			}
 		}
 	}
+
 	COutput::getInstance()->Draw(attackFlag?KEY_ENEMY_BOSS_JET_OPEN: KEY_ENEMY_BOSS_JET_CLOSE, mX, mY);
 	mRectP.SetXY(mX, mY);
 }

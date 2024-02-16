@@ -65,6 +65,7 @@ private:
 	unsigned long long lastMoveTime;
 	bool attackFlag;
 	bool leftFlag;
+	CMOVEPATH path;
 
 public:
 	EnemyJetBoss(CBulletAction*);

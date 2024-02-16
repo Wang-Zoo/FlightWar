@@ -58,7 +58,7 @@ class EnemyBossJetBullet :public CBASEBULLET {
 private:
 
 public:
-	EnemyBossJetBullet();
+	EnemyBossJetBullet(int x,int y);
 	void Init();
 	void Run();
 	void End();
