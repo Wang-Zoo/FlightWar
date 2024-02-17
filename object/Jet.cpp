@@ -14,6 +14,7 @@ CJet::CJet(CBulletAction* ba,int x,int y,int w,int h)
 	mY = (float)y;
 	mRectP.SetXY(x,y);
 	mRectP.SetWH(w,h);
+	wudi = false;
 }
 
 CJet::~CJet()
@@ -23,6 +24,9 @@ CJet::~CJet()
 
 bool CJet::collision(CMyRect* r)
 {
+	if (wudi) {
+		return false;
+	}
 	return mRectP.Collision(r);
 }
 
@@ -178,6 +182,7 @@ void EnemyJetNumOne::aiVerMove()
 EnemyJetNumOne::EnemyJetNumOne(CBulletAction* ba,int offsetX) :CJet(ba,offsetX,0,ENEMY_JET_WIDTH,ENEMY_JET_HEIGHT)
 {
 	hp = 1;
+	wudi = true;
 	this->offsetX = (float)offsetX;
 	leftDir = false;
 	upDir = false;
@@ -192,12 +197,12 @@ EnemyJetNumOne::EnemyJetNumOne(CBulletAction* ba,int offsetX) :CJet(ba,offsetX,0
 	}
 
 	{
-		CPOS pos(offsetX, 200);
+		CPOS pos(offsetX, 400);
 		path.add(pos);
 	}
 
 	{
-		CPOS pos(offsetX + 50, 200);
+		CPOS pos(offsetX + 50, 400);
 		path.add(pos);
 	}
 
@@ -229,6 +234,7 @@ void EnemyJetNumOne::Run()
 		upDir = path.calculatePos(&mX, &mY);
 	}
 	else {
+		wudi = false;
 		unsigned long long curTime = GetTickCount64();
 
 		if (curTime - lastTime > 10) {
@@ -251,6 +257,7 @@ void EnemyJetNumOne::End()
 EnemyJetBoss::EnemyJetBoss(CBulletAction* ba):CJet(ba, (_CLIENT_W - ENEMY_BOSS_JET_WIDTH) / 2, 0 - ENEMY_BOSS_JET_HEIGHT,ENEMY_BOSS_JET_WIDTH,ENEMY_BOSS_JET_HEIGHT)
 {
 	hp = 100;
+	wudi = true;
 	{
 		CPOS pos((_CLIENT_W - ENEMY_BOSS_JET_WIDTH)/2, 0 - ENEMY_BOSS_JET_HEIGHT);
 		path.add(pos);
@@ -294,6 +301,7 @@ void EnemyJetBoss::Run()
 		path.calculatePos(&mX, &mY);
 	}
 	else {
+		wudi = false;
 		if (curTime - lastMoveTime > 10) {
 			lastMoveTime = curTime;
 			if (mX > 400) {

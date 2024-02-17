@@ -18,6 +18,7 @@ public:
 	void dead();
 	bool canDestory();
 protected:
+	bool wudi;
 	int hp;
 	CBZ mBZ;
 	CMyRect mRectP;
