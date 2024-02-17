@@ -60,8 +60,8 @@ void CJETMANAGER::Init()
 	COutput::getInstance()->AddBmp(BMP_ENEMY_BOSS_JET_PATH, BMP_BOSS_ENEMY_JET);
 	addFinish = false;
 	startX = 500;
+	normalEenmyCount = 5;
 	Add(new CMyJet(mBA));
-	Add(new EnemyJetBoss(mBA));
 }
 
 void CJETMANAGER::Run()
@@ -78,17 +78,30 @@ void CJETMANAGER::Run()
 			it++;
 		}
 	}
+	int normalEnemy = 0;
+	for (auto temp : jets) {
+		if (dynamic_cast<EnemyJetNumOne*>(temp)) {
+			normalEnemy++;
+		}
+	}
+	if (normalEnemy == 0) {
+		if (normalEenmyCount > 0) {
+			normalEenmyCount--;
+			startX = 500;
+		}
+		else if (normalEenmyCount == 0) {
+			Add(new EnemyJetBoss(mBA));
+			normalEenmyCount--;
+		}
+	}
 	unsigned long long curTime = GetTickCount64();
-	if (!addFinish&&curTime - lastAddNewEnemyTime > 1000) {
+	if (startX > 100&&curTime - lastAddNewEnemyTime > 1000) {
 		lastAddNewEnemyTime = curTime;
 		Add(new EnemyJetNumOne(mBA, startX));
 		startX -= 150;
-		if (startX <= 100) {
-			addFinish = true;
-		}
 	}
 }
-
+    
 void CJETMANAGER::End()
 {
 	for (auto temp : jets)

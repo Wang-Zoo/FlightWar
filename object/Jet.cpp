@@ -33,7 +33,10 @@ bool CJet::isDead()
 
 void CJet::dead()
 {
-	isDeaded = true;
+	hp--;
+	if (hp <= 0) {
+		isDeaded = true;
+	}
 }
 
 bool CJet::canDestory()
@@ -43,7 +46,7 @@ bool CJet::canDestory()
 
 CMyJet::CMyJet(CBulletAction* ba) :CJet(ba, (_CLIENT_W - MY_JET_WIDTH) / 2, (_CLIENT_H - MY_JET_HEIGHT - 50),MY_JET_WIDTH,MY_JET_HEIGHT)
 {
-
+	hp = 1;
 }
 
 CMyJet::~CMyJet()
@@ -174,6 +177,7 @@ void EnemyJetNumOne::aiVerMove()
 
 EnemyJetNumOne::EnemyJetNumOne(CBulletAction* ba,int offsetX) :CJet(ba,offsetX,0,ENEMY_JET_WIDTH,ENEMY_JET_HEIGHT)
 {
+	hp = 1;
 	this->offsetX = offsetX;
 	leftDir = false;
 	upDir = false;
@@ -246,6 +250,7 @@ void EnemyJetNumOne::End()
 
 EnemyJetBoss::EnemyJetBoss(CBulletAction* ba):CJet(ba, (_CLIENT_W - ENEMY_BOSS_JET_WIDTH) / 2, 0 - ENEMY_BOSS_JET_HEIGHT,ENEMY_BOSS_JET_WIDTH,ENEMY_BOSS_JET_HEIGHT)
 {
+	hp = 50;
 	{
 		CPOS pos((_CLIENT_W - ENEMY_BOSS_JET_WIDTH)/2, 0 - ENEMY_BOSS_JET_HEIGHT);
 		path.add(pos);
@@ -272,14 +277,19 @@ void EnemyJetBoss::Init()
 
 void EnemyJetBoss::Run()
 {
+	if (isDeaded) {
+		mBZ.show(mX, mY, ENEMY_BOSS_JET_WIDTH, ENEMY_BOSS_JET_HEIGHT);
+		return;
+	}
 	unsigned long long curTime = GetTickCount64();
 	if (curTime - lastAttackTime > 5000) {
 		attackFlag = !attackFlag;
 		lastAttackTime = curTime;
-		if (attackFlag) {
-			mBulletAction->Add(new EnemyBossJetBullet(mX+(ENEMY_BOSS_JET_WIDTH-ENEMY_BOSS_BULLET_WIDTH)/2, mY+ (ENEMY_BOSS_JET_HEIGHT - ENEMY_BOSS_BULLET_HEIGHT) / 2));
-		}
 	} 
+	if (attackFlag && curTime - lastFireTime > 1000) {
+		lastFireTime = curTime;
+		mBulletAction->Add(new EnemyBossJetBullet(mX + (ENEMY_BOSS_JET_WIDTH - ENEMY_BOSS_BULLET_WIDTH) / 2, mY + (ENEMY_BOSS_JET_HEIGHT - ENEMY_BOSS_BULLET_HEIGHT) / 2));
+	}
 	if (!path.finish()) {
 		path.calculatePos(&mX, &mY);
 	}

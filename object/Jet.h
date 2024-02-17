@@ -18,6 +18,7 @@ public:
 	void dead();
 	bool canDestory();
 protected:
+	int hp;
 	CBAOZHA mBZ;
 	CRect mRectP;
 	float mX;
@@ -62,6 +63,7 @@ public:
 class EnemyJetBoss :public CJet {
 private:
 	unsigned long long lastAttackTime;
+	unsigned long long lastFireTime;
 	unsigned long long lastMoveTime;
 	bool attackFlag;
 	bool leftFlag;

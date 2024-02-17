@@ -30,6 +30,7 @@ private:
 	static CJETMANAGER* p;
 	CBulletAction* mBA;
 	int startX;
+	int normalEenmyCount;
 	bool addFinish;
 	void Add(CJet*);
 	CJETMANAGER();
