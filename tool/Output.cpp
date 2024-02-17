@@ -51,6 +51,11 @@ void COutput::Begin()
 	BitBlt(mBackHDC, 0, 0, mCw, mCh, 0, 0, 0, WHITENESS);
 }
 
+void COutput::fillBlack()
+{
+	BitBlt(mBackHDC, 0, 0, mCw, mCh, 0, 0, 0, BLACKNESS);
+}
+
 void COutput::End()
 {
 	BitBlt(mMainHDC, 0, 0, mCw, mCh, mBackHDC, 0, 0, SRCCOPY);
@@ -129,4 +134,11 @@ void COutput::Draw(const char* key, int x, int y, int targetW, int targetH)
 
 	PIC* pic = &it->second;
 	TransparentBlt(mBackHDC, x, y, targetW, targetH, pic->hdc, pic->offx, pic->offy, targetW, targetH, pic->c);
+}
+
+void COutput::DrawCustomText(LPCWSTR data, int x, int y,int length)
+{
+	SetBkColor(mBackHDC, RGB(0,0,0));
+	SetTextColor(mBackHDC, RGB(255, 255, 255));
+	TextOut(mBackHDC, x, y, data, length);
 }

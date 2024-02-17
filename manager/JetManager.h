@@ -19,12 +19,12 @@ class CJETMANAGER:public CBASEMANAGER,public CJetAction
 public:
 	~CJETMANAGER();
 	void Init();
-	void Run();
+	bool Run();
 	void End();
 	static CJETMANAGER* getInstance();
 	void setBA(CBulletAction* ba);
 	bool collision(CRect* bulletP,bool isEnemy);
-
+	bool stop();
 private:
 	unsigned long long lastAddNewEnemyTime;
 	static CJETMANAGER* p;

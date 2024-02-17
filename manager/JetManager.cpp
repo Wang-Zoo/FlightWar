@@ -44,6 +44,22 @@ bool CJETMANAGER::collision(CRect* bulletP,bool isEnemy)
 	return false;
 }
 
+bool CJETMANAGER::stop()
+{
+	if (normalEenmyCount < 0) {
+		int normalEnemy = 0;
+		for (auto temp : jets) {
+			if (!dynamic_cast<CMyJet*>(temp)) {
+				normalEnemy++;
+			}
+		}
+		return !normalEnemy;
+	}
+	else {
+		return false;
+	}
+}
+
 
 void CJETMANAGER::Add(CJet* jet)
 {
@@ -107,12 +123,11 @@ void CJETMANAGER::Init()
 	COutput::getInstance()->AddBmp(BMP_JET_PATH, BMP_JET);
 	COutput::getInstance()->AddBmp(BMP_ENEMY_JET_PATH, BMP_ENEMY_JET);
 	COutput::getInstance()->AddBmp(BMP_ENEMY_BOSS_JET_PATH, BMP_BOSS_ENEMY_JET);
-	addFinish = false;
 	startX = 500;
 	normalEenmyCount = 5;
 }
 
-void CJETMANAGER::Run()
+bool CJETMANAGER::Run()
 {
 	auto it = jets.begin();
 	for (;it!=jets.end();)
@@ -129,6 +144,7 @@ void CJETMANAGER::Run()
 	AddMyJet();
 	AddNormalEnemy();
 	AddBoss();
+	return stop();
 }
     
 void CJETMANAGER::End()

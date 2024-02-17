@@ -17,7 +17,7 @@ void CBUllETMANAGER::Init()
 	Add(new MyJetBulletNumTwo);
 }
 
-void CBUllETMANAGER::Run()
+bool CBUllETMANAGER::Run()
 {
 	for (auto temp:bullets)
 	{
@@ -42,6 +42,7 @@ void CBUllETMANAGER::Run()
 			it++;
 		}
 	}
+	return false;
 }
 
 void CBUllETMANAGER::End()
@@ -49,6 +50,13 @@ void CBUllETMANAGER::End()
 	for (auto temp : bullets)
 	{
 		temp->End();
+	}
+	auto it = bullets.begin();
+	for (;it!=bullets.end();)
+	{
+		(*it)->End();
+		delete *it;
+		it = bullets.erase(it);
 	}
 }
 

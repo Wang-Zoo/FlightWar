@@ -3,6 +3,7 @@
 #define _CLIENT_W 763
 #define _CLIENT_H 706
 //bmpÂ·¾¶
+#define BMP_STARTUI_PATH L"pic\\start_ui.bmp"
 #define BMP_BG_PATH L"pic\\bg.bmp"
 #define BMP_JET_PATH L"pic\\jet_action.bmp"
 #define BMP_ENEMY_JET_PATH L"pic\\enemy_jet_action.bmp"
@@ -11,6 +12,12 @@
 #define BMP_FIRE_BULLET_PATH L"pic\\fire_bullet_all.bmp"
 #define BMP_ENEMY_BULLET_PATH L"pic\\enemy_bullet.bmp"
 #define BMP_BAOZHA_PATH L"pic\\baozha.bmp"
+//¿ª³¡
+#define BMP_START "startui"
+#define KEY_BLACK_START "startui_black"
+#define KEY_COLOR_START "startui_color"
+#define START_WIDTH (655-19)
+#define START_HEIGHT (229-5)
 //±³¾°
 #define BMP_BG "background"
 #define KEY_BG "bg"
@@ -61,6 +68,11 @@
 //±¬Õ¨
 #define BZ_WIDTH   73
 #define BZ_HEIGHT  73
-#define BZ_SMALL_WIDTH   43//112 37     155 74
-#define BZ_SMALL_HEIGHT  37
-//190 - 36         
+#define BZ_SMALL_WIDTH   43
+#define BZ_SMALL_HEIGHT  37      
+
+//³¡¾°×´Ì¬
+#define SCENE_IDOL 0
+#define SCENE_NEXT 1
+#define SCENE_PRE 2
+#define SCENE_EXIT 3

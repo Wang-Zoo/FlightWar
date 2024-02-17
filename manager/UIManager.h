@@ -7,7 +7,7 @@ class CUIMANAGER:public CBASEMANAGER
 public:
 	~CUIMANAGER();
 	void Init();
-	void Run();
+	bool Run();
 	void End();
 	static CUIMANAGER* getInstance();
 private:

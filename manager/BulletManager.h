@@ -20,7 +20,7 @@ class CBUllETMANAGER :public CBASEMANAGER,public CBulletAction
 public:
 	~CBUllETMANAGER();
 	void Init();
-	void Run();
+	bool Run();
 	void End();
 	void Add(CBASEBULLET*);
 	void fireBullet(int x, int y,bool fire);

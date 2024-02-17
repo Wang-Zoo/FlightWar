@@ -1,9 +1,7 @@
 #include "Game.h"
-#include "manager/UIManager.h"
-#include "manager/JetManager.h"
-#include "manager/BulletManager.h"
 #include "tool/Output.h"
 #include "tool/config.h"
+#include "scene/scene.h"
 
 Game* Game::gamep = 0;
 
@@ -25,19 +23,13 @@ Game* Game::getInstance()
 
 void Game::Init(HWND hWnd)
 {
+	index = 0;
 	COutput::getInstance()->Init(_CLIENT_W, _CLIENT_H, hWnd);
-	CUIMANAGER* up = CUIMANAGER::getInstance();
-	CBUllETMANAGER* bp = CBUllETMANAGER::getInstance();
-	CJETMANAGER* jp = CJETMANAGER::getInstance();
-
-	bp->setJetAction(jp);
-	jp->setBA(bp);
-
-	mList.push_back(up);
-	mList.push_back(bp);
-	mList.push_back(jp);
-
-	for (auto temp : mList) {
+	mList.push_back(new CStartScene);
+	mList.push_back(new CNumOneScene);
+	mList.push_back(new CEndScene);
+	for (auto temp:mList )
+	{
 		temp->Init();
 	}
 }
@@ -45,17 +37,30 @@ void Game::Init(HWND hWnd)
 void Game::Run()
 {
 	COutput::getInstance()->Begin();
-
-	for (auto temp : mList) {
-		temp->Run();
-	}
-
+	int state = mList[index]->Run();
 	COutput::getInstance()->End();
+	if (state == SCENE_NEXT) {
+		index++;
+		if (index >= mList.size() - 1) {
+			index = mList.size() - 1;
+		}
+	}
+	else if (state == SCENE_PRE) {
+		index--;
+		if (index <= 0) {
+			index = 0;
+		}
+		mList[index]->Init();
+	}
+	else if (state == SCENE_EXIT) {
+		PostQuitMessage(0);
+	}
 }
 
 void Game::End()
 {
-	for (auto temp : mList) {
+	for (auto temp : mList)
+	{
 		temp->End();
 		delete temp;
 	}

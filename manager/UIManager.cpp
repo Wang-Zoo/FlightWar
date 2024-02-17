@@ -25,12 +25,13 @@ void CUIMANAGER::Init()
 	}
 }
 
-void CUIMANAGER::Run()
+bool CUIMANAGER::Run()
 {
 	for (auto temp : uiList)
 	{
 		temp->Run();
 	}
+	return false;
 }
 
 void CUIMANAGER::End()
