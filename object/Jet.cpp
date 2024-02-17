@@ -250,7 +250,7 @@ void EnemyJetNumOne::End()
 
 EnemyJetBoss::EnemyJetBoss(CBulletAction* ba):CJet(ba, (_CLIENT_W - ENEMY_BOSS_JET_WIDTH) / 2, 0 - ENEMY_BOSS_JET_HEIGHT,ENEMY_BOSS_JET_WIDTH,ENEMY_BOSS_JET_HEIGHT)
 {
-	hp = 50;
+	hp = 100;
 	{
 		CPOS pos((_CLIENT_W - ENEMY_BOSS_JET_WIDTH)/2, 0 - ENEMY_BOSS_JET_HEIGHT);
 		path.add(pos);

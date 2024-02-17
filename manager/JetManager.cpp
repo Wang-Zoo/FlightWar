@@ -45,6 +45,49 @@ void CJETMANAGER::Add(CJet* jet)
 	jets.push_back(jet);
 }
 
+void CJETMANAGER::AddNormalEnemy()
+{
+	int normalEnemy = 0;
+	for (auto temp : jets) {
+		if (dynamic_cast<EnemyJetNumOne*>(temp)) {
+			normalEnemy++;
+		}
+	}
+	if (normalEnemy == 0) {
+		if (normalEenmyCount > 0&& startX<100) {
+			normalEenmyCount--;
+			startX = 500;
+		}
+	}
+	unsigned long long curTime = GetTickCount64();
+	if (startX > 100 && curTime - lastAddNewEnemyTime > 1000) {
+		lastAddNewEnemyTime = curTime;
+		Add(new EnemyJetNumOne(mBA, startX));
+		startX -= 150;
+	}
+}
+
+void CJETMANAGER::AddMyJet()
+{
+	bool find = false;
+	for (auto temp : jets) {
+		if (dynamic_cast<CMyJet*>(temp)) {
+			find = true;
+		}
+	}
+	if (!find) {
+		Add(new CMyJet(mBA));
+	}
+}
+
+void CJETMANAGER::AddBoss()
+{
+	if (normalEenmyCount == 0) {
+		Add(new EnemyJetBoss(mBA));
+		normalEenmyCount--;
+	}
+}
+
 CJETMANAGER::CJETMANAGER()
 {
 }
@@ -61,7 +104,6 @@ void CJETMANAGER::Init()
 	addFinish = false;
 	startX = 500;
 	normalEenmyCount = 5;
-	Add(new CMyJet(mBA));
 }
 
 void CJETMANAGER::Run()
@@ -78,28 +120,9 @@ void CJETMANAGER::Run()
 			it++;
 		}
 	}
-	int normalEnemy = 0;
-	for (auto temp : jets) {
-		if (dynamic_cast<EnemyJetNumOne*>(temp)) {
-			normalEnemy++;
-		}
-	}
-	if (normalEnemy == 0) {
-		if (normalEenmyCount > 0) {
-			normalEenmyCount--;
-			startX = 500;
-		}
-		else if (normalEenmyCount == 0) {
-			Add(new EnemyJetBoss(mBA));
-			normalEenmyCount--;
-		}
-	}
-	unsigned long long curTime = GetTickCount64();
-	if (startX > 100&&curTime - lastAddNewEnemyTime > 1000) {
-		lastAddNewEnemyTime = curTime;
-		Add(new EnemyJetNumOne(mBA, startX));
-		startX -= 150;
-	}
+	AddMyJet();
+	AddNormalEnemy();
+	AddBoss();
 }
     
 void CJETMANAGER::End()

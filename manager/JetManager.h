@@ -33,6 +33,9 @@ private:
 	int normalEenmyCount;
 	bool addFinish;
 	void Add(CJet*);
+	void AddNormalEnemy();
+	void AddMyJet();
+	void AddBoss();
 	CJETMANAGER();
 	CJETMANAGER(const CJETMANAGER& that);
 	std::vector<CJet*> jets;
