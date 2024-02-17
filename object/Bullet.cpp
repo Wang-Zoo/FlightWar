@@ -38,7 +38,7 @@ MyJetBulletNumOne::MyJetBulletNumOne(int x, int y) :CBASEBULLET(x + (MY_JET_WIDT
 
 void MyJetBulletNumOne::Init()  
 {
-	COutput::getInstance()->AddPic(BMP_BULLET, KEY_MY_BULLET_ONE_BG, 1, 1, MY_BULLET_NUM_ONE_WIDTH, MY_BULLET_NUM_ONE_HEIGHT, RGB(13, 237, 13));
+	COutput::getInstance()->AddPic(BMP_BULLET, KEY_MY_BULLET_ONE_BG, 230, 76, MY_BULLET_NUM_ONE_WIDTH, MY_BULLET_NUM_ONE_HEIGHT, RGB(13, 237, 13));
 }
 
 void MyJetBulletNumOne::Run()
@@ -67,8 +67,8 @@ MyJetBulletNumTwo::MyJetBulletNumTwo() :CBASEBULLET(0, 0, MY_BULLET_NUM_TWO_WIDT
 
 void MyJetBulletNumTwo::Init()
 {
-	COutput::getInstance()->AddPic(BMP_FIRE_BULLET, KEY_MY_BULLET_TWO_BG, 9, 0, MY_BULLET_NUM_TWO_WIDTH, MY_BULLET_NUM_TWO_HEIGHT, RGB(13, 237, 13));
-	COutput::getInstance()->AddPic(BMP_FIRE_BULLET, KEY_MY_BULLET_TWO_SMALL_BG, 92, 0, MY_BULLET_NUM_TWO_WIDTH, MY_BULLET_NUM_TWO_HEIGHT, RGB(13, 237, 13));
+	COutput::getInstance()->AddPic(BMP_BULLET, KEY_MY_BULLET_TWO_BG, 9, 0, MY_BULLET_NUM_TWO_WIDTH, MY_BULLET_NUM_TWO_HEIGHT, RGB(13, 237, 13));
+	COutput::getInstance()->AddPic(BMP_BULLET, KEY_MY_BULLET_TWO_SMALL_BG, 92, 0, MY_BULLET_NUM_TWO_WIDTH, MY_BULLET_NUM_TWO_HEIGHT, RGB(13, 237, 13));
 	smallFlag = false;
 }
 
@@ -127,8 +127,8 @@ EnemyJetBullet::EnemyJetBullet(int x,int y) :CBASEBULLET(x , y , ENEMY_BULLET_WI
 
 void EnemyJetBullet::Init()
 {
-	COutput::getInstance()->AddPic(BMP_ENEMY_BULLET, KEY_ENEMY_BULLET_RED_BG, 56, 7, ENEMY_BULLET_WIDTH, ENEMY_BULLET_HEIGHT, RGB(13, 237, 13));
-	COutput::getInstance()->AddPic(BMP_ENEMY_BULLET, KEY_ENEMY_BULLET_BLUE_BG, 57, 38, ENEMY_BULLET_WIDTH, ENEMY_BULLET_HEIGHT, RGB(13, 237, 13));
+	COutput::getInstance()->AddPic(BMP_BULLET, KEY_ENEMY_BULLET_RED_BG, 225, 37, ENEMY_BULLET_WIDTH, ENEMY_BULLET_HEIGHT, RGB(13, 237, 13));
+	COutput::getInstance()->AddPic(BMP_BULLET, KEY_ENEMY_BULLET_BLUE_BG, 224, 5, ENEMY_BULLET_WIDTH, ENEMY_BULLET_HEIGHT, RGB(13, 237, 13));
 }
 
 void EnemyJetBullet::Run()
@@ -159,7 +159,7 @@ EnemyBossJetBullet::EnemyBossJetBullet(int x,int y) :CBASEBULLET(x,y, ENEMY_BOSS
 
 void EnemyBossJetBullet::Init()
 {
-	COutput::getInstance()->AddPic(BMP_ENEMY_BULLET, KEY_ENEMY_BOSS_BULLET_BG, 7, 6, ENEMY_BOSS_BULLET_WIDTH, ENEMY_BOSS_BULLET_HEIGHT, RGB(13, 237, 13));
+	COutput::getInstance()->AddPic(BMP_BULLET, KEY_ENEMY_BOSS_BULLET_BG, 174, 5, ENEMY_BOSS_BULLET_WIDTH, ENEMY_BOSS_BULLET_HEIGHT, RGB(13, 237, 13));
 }
 
 void EnemyBossJetBullet::Run()

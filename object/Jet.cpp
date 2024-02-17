@@ -214,8 +214,8 @@ EnemyJetNumOne::~EnemyJetNumOne()
 
 void EnemyJetNumOne::Init()
 {
-	COutput::getInstance()->AddPic(BMP_ENEMY_JET, KEY_ENEMY_JET_UP, 6, 8, ENEMY_JET_WIDTH, ENEMY_JET_HEIGHT, RGB(13, 237, 13));
-	COutput::getInstance()->AddPic(BMP_ENEMY_JET, KEY_ENEMY_JET_DOWN, 73, 8, ENEMY_JET_WIDTH, ENEMY_JET_HEIGHT, RGB(13, 237, 13));
+	COutput::getInstance()->AddPic(BMP_JET, KEY_ENEMY_JET_UP, 0, 82, ENEMY_JET_WIDTH, ENEMY_JET_HEIGHT, RGB(13, 237, 13));
+	COutput::getInstance()->AddPic(BMP_JET, KEY_ENEMY_JET_DOWN, 66, 82, ENEMY_JET_WIDTH, ENEMY_JET_HEIGHT, RGB(13, 237, 13));
 }
 
 void EnemyJetNumOne::Run()  
@@ -271,8 +271,8 @@ void EnemyJetBoss::Init()
 	attackFlag = false;
 	leftFlag = false;
 	lastAttackTime = GetTickCount64();
-	COutput::getInstance()->AddPic(BMP_BOSS_ENEMY_JET, KEY_ENEMY_BOSS_JET_CLOSE, 41, 30, ENEMY_BOSS_JET_WIDTH, ENEMY_BOSS_JET_HEIGHT, RGB(13, 237, 13));
-	COutput::getInstance()->AddPic(BMP_BOSS_ENEMY_JET, KEY_ENEMY_BOSS_JET_OPEN, 237, 25, ENEMY_BOSS_JET_WIDTH, ENEMY_BOSS_JET_HEIGHT, RGB(13, 237, 13));
+	COutput::getInstance()->AddPic(BMP_JET, KEY_ENEMY_BOSS_JET_CLOSE, 228, 22, ENEMY_BOSS_JET_WIDTH, ENEMY_BOSS_JET_HEIGHT, RGB(13, 237, 13));
+	COutput::getInstance()->AddPic(BMP_JET, KEY_ENEMY_BOSS_JET_OPEN, 424, 16, ENEMY_BOSS_JET_WIDTH, ENEMY_BOSS_JET_HEIGHT, RGB(13, 237, 13));
 }
 
 void EnemyJetBoss::Run()

@@ -4,10 +4,9 @@
 
 CBAOZHA::CBAOZHA()
 {
-	COutput::getInstance()->AddBmp(BMP_BAOZHA_PATH, BMP_BAOZHA);
-	COutput::getInstance()->AddPic(BMP_BAOZHA, KEY_BAOZHA_ONE, 21, 21, BZ_WIDTH, BZ_HEIGHT, RGB(13, 237, 13));
-	COutput::getInstance()->AddPic(BMP_BAOZHA, KEY_BAOZHA_TWO, 97, 21, BZ_WIDTH, BZ_HEIGHT, RGB(13, 237, 13));
-	COutput::getInstance()->AddPic(BMP_BAOZHA, KEY_BAOZHA_THERE, 154, 21, BZ_WIDTH, BZ_HEIGHT, RGB(13, 237, 13));
+	COutput::getInstance()->AddPic(BMP_JET, KEY_BAOZHA_ONE, 0, 156, BZ_WIDTH, BZ_HEIGHT, RGB(13, 237, 13));
+	COutput::getInstance()->AddPic(BMP_JET, KEY_BAOZHA_TWO, 76, 156, BZ_WIDTH, BZ_HEIGHT, RGB(13, 237, 13));
+	COutput::getInstance()->AddPic(BMP_JET, KEY_BAOZHA_THERE, 132, 156, BZ_WIDTH, BZ_HEIGHT, RGB(13, 237, 13));
 	index = 0;
 }
 

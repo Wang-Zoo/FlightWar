@@ -121,8 +121,6 @@ CJETMANAGER::~CJETMANAGER()
 void CJETMANAGER::Init()
 {
 	COutput::getInstance()->AddBmp(BMP_JET_PATH, BMP_JET);
-	COutput::getInstance()->AddBmp(BMP_ENEMY_JET_PATH, BMP_ENEMY_JET);
-	COutput::getInstance()->AddBmp(BMP_ENEMY_BOSS_JET_PATH, BMP_BOSS_ENEMY_JET);
 	startX = 500;
 	normalEenmyCount = 5;
 }

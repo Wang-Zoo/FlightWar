@@ -10,9 +10,7 @@ CBUllETMANAGER::~CBUllETMANAGER()
 
 void CBUllETMANAGER::Init()
 {
-	COutput::getInstance()->AddBmp(BMP_BULLET_PATH, BMP_BULLET);
-	COutput::getInstance()->AddBmp(BMP_FIRE_BULLET_PATH, BMP_FIRE_BULLET);
-	COutput::getInstance()->AddBmp(BMP_ENEMY_BULLET_PATH, BMP_ENEMY_BULLET);
+	COutput::getInstance()->AddBmp(BMP_ALL_BULLET_PATH, BMP_BULLET);
 	//Ô¤Éè»ðÑæ×Óµ¯
 	Add(new MyJetBulletNumTwo);
 }
