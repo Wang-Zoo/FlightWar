@@ -169,7 +169,7 @@ void EnemyBossJetBullet::Run()
 		isDeaded = true;
 	}
 	COutput::getInstance()->Draw(KEY_ENEMY_BOSS_BULLET_BG, mX, mY);
-
+	mRect.SetXY(mX, mY);
 }
 
 void EnemyBossJetBullet::End()
