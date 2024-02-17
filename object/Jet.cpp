@@ -35,10 +35,10 @@ bool CJet::isDead()
 	return isDeaded;
 }
 
-void CJet::dead()
+void CJet::dead(float damage)
 {
-	hp--;
-	if (hp <= 0) {
+	hp-=damage;
+	if (hp <= 0.0f) {
 		isDeaded = true;
 	}
 }

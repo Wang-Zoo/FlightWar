@@ -15,11 +15,11 @@ public:
 	virtual void End() = 0;
 	bool collision(CMyRect* r);
 	bool isDead();
-	void dead();
+	void dead(float damage = 1.0f);
 	bool canDestory();
 protected:
 	bool wudi;
-	int hp;
+	float hp;
 	CBZ mBZ;
 	CMyRect mRectP;
 	float mX;

@@ -23,7 +23,7 @@ bool CBUllETMANAGER::Run()
 			continue;
 		}
 		bool isAllen = dynamic_cast<MyJetBulletNumTwo*>(temp) || dynamic_cast<MyJetBulletNumOne*>(temp);
-		bool collision = mJP->collision(temp->getRectP(),!isAllen);
+		bool collision = mJP->collision(temp->getRectP(),!isAllen, dynamic_cast<MyJetBulletNumTwo*>(temp)?0.01f:1.0f);
 		if (collision&& !dynamic_cast<MyJetBulletNumTwo*>(temp)) {
 			temp->dead();
 		}
