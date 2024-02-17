@@ -13,14 +13,14 @@ public:
 	virtual void Init() = 0;
 	virtual void Run() = 0;
 	virtual void End() = 0;
-	bool collision(CRect* r);
+	bool collision(CMyRect* r);
 	bool isDead();
 	void dead();
 	bool canDestory();
 protected:
 	int hp;
-	CBAOZHA mBZ;
-	CRect mRectP;
+	CBZ mBZ;
+	CMyRect mRectP;
 	float mX;
 	float mY;
 	float step;
@@ -42,7 +42,7 @@ public:
 
 class EnemyJetNumOne :public CJet {
 private:
-	int offsetX;
+	float offsetX;
 	bool leftDir;
 	bool upDir;
 	int horStep;

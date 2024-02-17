@@ -10,7 +10,7 @@ class CJetAction
 public:
 	CJetAction();
 	~CJetAction();
-	virtual bool collision(CRect*,bool) = 0;
+	virtual bool collision(CMyRect*,bool) = 0;
 };
 
 //·É»ú¹ÜÀíÆ÷
@@ -23,7 +23,7 @@ public:
 	void End();
 	static CJETMANAGER* getInstance();
 	void setBA(CBulletAction* ba);
-	bool collision(CRect* bulletP,bool isEnemy);
+	bool collision(CMyRect* bulletP,bool isEnemy);
 	bool stop();
 private:
 	unsigned long long lastAddNewEnemyTime;

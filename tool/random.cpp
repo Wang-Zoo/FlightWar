@@ -2,7 +2,7 @@
 #include<iostream>
 void initRandom()
 {
-	srand(time(0));
+	srand(static_cast<unsigned int>(time(nullptr)));
 }
 
 int getIntRange(int max, int min)

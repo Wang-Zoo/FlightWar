@@ -1,10 +1,11 @@
 #include "Bullet.h"
 #include "tool/Output.h"
 #include "tool/config.h"
+
 CBASEBULLET::CBASEBULLET(int x, int y, int w, int h)
 {
-	mX = x;
-	mY = y;
+	mX =(float) x;
+	mY = (float)y;
 
 	mRect.SetXY(x, y);
 	mRect.SetWH(w, h);
@@ -26,7 +27,7 @@ void CBASEBULLET::dead()
 	isDeaded = true;
 }
 
-CRect* CBASEBULLET::getRectP()
+CMyRect* CBASEBULLET::getRectP()
 {
 	return &mRect;
 }
@@ -46,12 +47,12 @@ void MyJetBulletNumOne::Run()
 	if (isDeaded) {
 		return;
 	}
-	COutput::getInstance()->Draw(KEY_MY_BULLET_ONE_BG, mX, mY);
+	COutput::getInstance()->Draw(KEY_MY_BULLET_ONE_BG, (int)mX, (int)mY);
 	mY -= 1.0f;
 	if (mY < 0) {
 		isDeaded = true;
 	}
-	mRect.SetXY(mX, mY);
+	mRect.SetXY((int)mX,(int) mY);
 }
 
 void MyJetBulletNumOne::End()
@@ -77,7 +78,7 @@ void MyJetBulletNumTwo::Run()
 	if (isDeaded) {
 		return;
 	}
-	COutput::getInstance()->Draw(smallFlag? KEY_MY_BULLET_TWO_BG:KEY_MY_BULLET_TWO_SMALL_BG, mX, mY, targetW, targetH);
+	COutput::getInstance()->Draw(smallFlag? KEY_MY_BULLET_TWO_BG:KEY_MY_BULLET_TWO_SMALL_BG,(int) mX,(int) mY, targetW, targetH);
 
 	unsigned long long curTime = GetTickCount64();
 	if (curTime - mLastSmallTime > 10) {
@@ -95,7 +96,7 @@ void MyJetBulletNumTwo::Run()
 			mX = 0 - MY_BULLET_NUM_TWO_WIDTH;
 		}
 	}
-	mRect.SetXY(mX, mY);
+	mRect.SetXY((int)mX, (int)mY);
 }
 
 void MyJetBulletNumTwo::End()
@@ -105,8 +106,8 @@ void MyJetBulletNumTwo::End()
 
 void MyJetBulletNumTwo::setXY(int x, int y)
 {
-	mX = x + (MY_JET_WIDTH - MY_BULLET_NUM_TWO_WIDTH) / 2;
-	mY = y - targetH;
+	mX = (float)(x + (MY_JET_WIDTH - MY_BULLET_NUM_TWO_WIDTH) / 2);
+	mY = (float)(y - targetH);
 }
 
 void MyJetBulletNumTwo::fire(int x, int y)
@@ -143,9 +144,9 @@ void EnemyJetBullet::Run()
 		}
 	}
 	if (!isDeaded) {
-		COutput::getInstance()->Draw(colorFlag ? KEY_ENEMY_BULLET_BLUE_BG : KEY_ENEMY_BULLET_RED_BG, mX, mY);
+		COutput::getInstance()->Draw(colorFlag ? KEY_ENEMY_BULLET_BLUE_BG : KEY_ENEMY_BULLET_RED_BG, (int)mX, (int)mY);
 	}
-	mRect.SetXY(mX, mY);
+	mRect.SetXY((int)mX, (int)mY);
 }
 
 void EnemyJetBullet::End()
@@ -168,8 +169,8 @@ void EnemyBossJetBullet::Run()
 	if (mY > _CLIENT_H - ENEMY_BOSS_BULLET_HEIGHT) {
 		isDeaded = true;
 	}
-	COutput::getInstance()->Draw(KEY_ENEMY_BOSS_BULLET_BG, mX, mY);
-	mRect.SetXY(mX, mY);
+	COutput::getInstance()->Draw(KEY_ENEMY_BOSS_BULLET_BG, (int)mX, (int)mY);
+	mRect.SetXY((int)mX, (int)mY);
 }
 
 void EnemyBossJetBullet::End()

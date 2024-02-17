@@ -1,10 +1,10 @@
 #pragma once
 
-class CBAOZHA
+class CBZ
 {
 public:
-	CBAOZHA();
-	~CBAOZHA();
+	CBZ();
+	~CBZ();
 	void show(int x,int y,int w, int h);
 	bool finish();
 private:

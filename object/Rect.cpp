@@ -1,6 +1,6 @@
 #include "Rect.h"
 
-CRect::CRect()
+CMyRect::CMyRect()
 {
 	_x = 0;
 	_y = 0;
@@ -8,24 +8,24 @@ CRect::CRect()
 	_h = 0;
 }
 
-CRect::~CRect()
+CMyRect::~CMyRect()
 {
 
 }
 
-void CRect::SetXY(int x, int y)
+void CMyRect::SetXY(int x, int y)
 {
 	this->_x = x;
 	this->_y = y;
 }
 
-void CRect::SetWH(int w, int h)
+void CMyRect::SetWH(int w, int h)
 {
 	this->_w = w;
 	this->_h = h;
 }
 
-bool CRect::Collision(CRect* r)
+bool CMyRect::Collision(CMyRect* r)
 {
 	if (!r)
 		return false;

@@ -42,7 +42,7 @@ void Game::Run()
 	if (state == SCENE_NEXT) {
 		index++;
 		if (index >= mList.size() - 1) {
-			index = mList.size() - 1;
+			index = (int)mList.size() - 1;
 		}
 	}
 	else if (state == SCENE_PRE) {

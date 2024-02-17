@@ -10,7 +10,7 @@ public:
 	virtual void End() = 0;
 
 protected:
-	CRect* rect;
+	CMyRect* rect;
 };
 
 class  BACKGROUND:public CBASEUI

@@ -119,7 +119,7 @@ void COutput::Draw(const char* key, int x, int y, float sx, float sy)
 	}
 
 	PIC* pic = &it->second;
-	TransparentBlt(mBackHDC, x, y, pic->w * sx, pic->h * sy, pic->hdc, pic->offx, pic->offy, pic->w, pic->h, pic->c);
+	TransparentBlt(mBackHDC, x, y, (int)(pic->w * sx), (int)(pic->h * sy), pic->hdc, pic->offx, pic->offy, pic->w, pic->h, pic->c);
 }
 
 void COutput::Draw(const char* key, int x, int y, int targetW, int targetH)

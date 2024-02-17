@@ -2,7 +2,7 @@
 #include "tool/Output.h"
 #include "tool/config.h"
 
-CBAOZHA::CBAOZHA()
+CBZ::CBZ()
 {
 	COutput::getInstance()->AddPic(BMP_JET, KEY_BAOZHA_ONE, 0, 156, BZ_WIDTH, BZ_HEIGHT, RGB(13, 237, 13));
 	COutput::getInstance()->AddPic(BMP_JET, KEY_BAOZHA_TWO, 76, 156, BZ_WIDTH, BZ_HEIGHT, RGB(13, 237, 13));
@@ -10,12 +10,12 @@ CBAOZHA::CBAOZHA()
 	index = 0;
 }
 
-CBAOZHA::~CBAOZHA()
+CBZ::~CBZ()
 {
 
 }
 
-void CBAOZHA::show(int x,int y,int w,int h)
+void CBZ::show(int x,int y,int w,int h)
 {
 
 	x = x + (w - BZ_WIDTH) / 2;
@@ -37,7 +37,7 @@ void CBAOZHA::show(int x,int y,int w,int h)
 	}
 }
 
-bool CBAOZHA::finish()
+bool CBZ::finish()
 {
 	return index > 3;
 }

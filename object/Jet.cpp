@@ -10,8 +10,8 @@ CJet::CJet(CBulletAction* ba,int x,int y,int w,int h)
 	mBulletAction = 0;
 	mBulletAction = ba;
 	isDeaded = false;
-	mX = x;
-	mY = y;
+	mX = (float)x;
+	mY = (float)y;
 	mRectP.SetXY(x,y);
 	mRectP.SetWH(w,h);
 }
@@ -21,7 +21,7 @@ CJet::~CJet()
 
 }
 
-bool CJet::collision(CRect* r)
+bool CJet::collision(CMyRect* r)
 {
 	return mRectP.Collision(r);
 }
@@ -64,17 +64,17 @@ void CMyJet::Init()
 void CMyJet::Run()
 {
 	if (isDeaded) {
-		mBZ.show(mX,mY,MY_JET_WIDTH,MY_JET_HEIGHT);
+		mBZ.show((int)mX, (int)mY,MY_JET_WIDTH,MY_JET_HEIGHT);
 		return;
 	}
 	if (GetAsyncKeyState('J') & 0x8000) {
 		unsigned long long curTime = GetTickCount64();
 		if (curTime - mLastFireTime > 100) {
 			mLastFireTime = curTime;
-			mBulletAction->Add(new MyJetBulletNumOne(mX,mY));
+			mBulletAction->Add(new MyJetBulletNumOne((int)mX, (int)mY));
 		}
 	}
-	mBulletAction->fireBullet(mX,mY, GetAsyncKeyState('K') & 0x8000);	
+	mBulletAction->fireBullet((int)mX, (int)mY, GetAsyncKeyState('K') & 0x8000);
 	if (GetAsyncKeyState('W') & 0x8000) {
 		mY -= step;
 		if (mY < 0) {
@@ -105,15 +105,15 @@ void CMyJet::Run()
 		horDir = 0;
 	}
 	if (horDir == 0) {
-		COutput::getInstance()->Draw(KEY_MY_JET_IDOL, mX, mY);
+		COutput::getInstance()->Draw(KEY_MY_JET_IDOL, (int)mX, (int)mY);
 	}
 	else if (horDir == 1) {
-		COutput::getInstance()->Draw(KEY_MY_JET_LEFT, mX, mY);
+		COutput::getInstance()->Draw(KEY_MY_JET_LEFT, (int)mX, (int)mY);
 	}
 	else if (horDir == 2) {
-		COutput::getInstance()->Draw(KEY_MY_JET_RIGHT, mX, mY);
+		COutput::getInstance()->Draw(KEY_MY_JET_RIGHT, (int)mX, (int)mY);
 	}
-	mRectP.SetXY(mX, mY);
+	mRectP.SetXY((int)mX, (int)mY);
 }
 
 void CMyJet::End()
@@ -167,7 +167,7 @@ void EnemyJetNumOne::aiVerMove()
 		unsigned long long curTime = GetTickCount64();
 		if (curTime - lastAttckTime > 4000) {
 			lastAttckTime = curTime;
-			mBulletAction->Add(new EnemyJetBullet(mX, mY+ ENEMY_JET_HEIGHT));
+			mBulletAction->Add(new EnemyJetBullet((int)mX, (int)mY+ ENEMY_JET_HEIGHT));
 		}
 	}
 	else {
@@ -178,7 +178,7 @@ void EnemyJetNumOne::aiVerMove()
 EnemyJetNumOne::EnemyJetNumOne(CBulletAction* ba,int offsetX) :CJet(ba,offsetX,0,ENEMY_JET_WIDTH,ENEMY_JET_HEIGHT)
 {
 	hp = 1;
-	this->offsetX = offsetX;
+	this->offsetX = (float)offsetX;
 	leftDir = false;
 	upDir = false;
 	horStep = 0;
@@ -221,7 +221,7 @@ void EnemyJetNumOne::Init()
 void EnemyJetNumOne::Run()  
 {
 	if (isDeaded) {
-		mBZ.show(mX, mY,ENEMY_JET_WIDTH, ENEMY_JET_HEIGHT);
+		mBZ.show((int)mX, (int)mY,ENEMY_JET_WIDTH, ENEMY_JET_HEIGHT);
 		return;
 	}
 
@@ -239,8 +239,8 @@ void EnemyJetNumOne::Run()
 		}
 
 	}
-	COutput::getInstance()->Draw(upDir?KEY_ENEMY_JET_UP: KEY_ENEMY_JET_DOWN, mX, mY);
-	mRectP.SetXY(mX, mY);
+	COutput::getInstance()->Draw(upDir?KEY_ENEMY_JET_UP: KEY_ENEMY_JET_DOWN, (int)mX, (int)mY);
+	mRectP.SetXY((int)mX, (int)mY);
 }
 
 void EnemyJetNumOne::End()
@@ -278,7 +278,7 @@ void EnemyJetBoss::Init()
 void EnemyJetBoss::Run()
 {
 	if (isDeaded) {
-		mBZ.show(mX, mY, ENEMY_BOSS_JET_WIDTH, ENEMY_BOSS_JET_HEIGHT);
+		mBZ.show((int)mX, (int)mY, ENEMY_BOSS_JET_WIDTH, ENEMY_BOSS_JET_HEIGHT);
 		return;
 	}
 	unsigned long long curTime = GetTickCount64();
@@ -288,7 +288,7 @@ void EnemyJetBoss::Run()
 	} 
 	if (attackFlag && curTime - lastFireTime > 1000) {
 		lastFireTime = curTime;
-		mBulletAction->Add(new EnemyBossJetBullet(mX + (ENEMY_BOSS_JET_WIDTH - ENEMY_BOSS_BULLET_WIDTH) / 2, mY + (ENEMY_BOSS_JET_HEIGHT - ENEMY_BOSS_BULLET_HEIGHT) / 2));
+		mBulletAction->Add(new EnemyBossJetBullet((int)mX + (ENEMY_BOSS_JET_WIDTH - ENEMY_BOSS_BULLET_WIDTH) / 2, (int)mY + (ENEMY_BOSS_JET_HEIGHT - ENEMY_BOSS_BULLET_HEIGHT) / 2));
 	}
 	if (!path.finish()) {
 		path.calculatePos(&mX, &mY);
@@ -311,8 +311,8 @@ void EnemyJetBoss::Run()
 		}
 	}
 
-	COutput::getInstance()->Draw(attackFlag?KEY_ENEMY_BOSS_JET_OPEN: KEY_ENEMY_BOSS_JET_CLOSE, mX, mY);
-	mRectP.SetXY(mX, mY);
+	COutput::getInstance()->Draw(attackFlag?KEY_ENEMY_BOSS_JET_OPEN: KEY_ENEMY_BOSS_JET_CLOSE, (int)mX, (int)mY);
+	mRectP.SetXY((int)mX, (int)mY);
 }
 
 void EnemyJetBoss::End()

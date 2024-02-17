@@ -10,9 +10,9 @@ public:
 	virtual void End() = 0;
 	bool isDead();
 	void dead();
-	CRect* getRectP();
+	CMyRect* getRectP();
 protected:
-	CRect mRect;
+	CMyRect mRect;
 	float mX;
 	float mY;
 	bool isDeaded;

@@ -24,8 +24,8 @@ void BACKGROUND::Init()
 
 void BACKGROUND::Run()
 {
-	COutput::getInstance()->Draw(KEY_BG, 0, moveY);
-	COutput::getInstance()->Draw(KEY_BG, 0, moveY- _CLIENT_H);
+	COutput::getInstance()->Draw(KEY_BG, 0, (int)moveY);
+	COutput::getInstance()->Draw(KEY_BG, 0, (int)moveY- _CLIENT_H);
 	moveY+=0.5f;
 	if (moveY >= _CLIENT_H) {
 		moveY = 0.0f;

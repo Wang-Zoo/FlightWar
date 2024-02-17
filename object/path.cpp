@@ -39,7 +39,7 @@ bool CMOVEPATH::calculatePos(float* xp, float* yp)
 			xFinish = true;
 		}
 		else {
-			ratio = offsetY / offsetX;
+			ratio = (float)offsetY / offsetX;
 		}
 		if(offsetY==0){
 			yFinish = true;

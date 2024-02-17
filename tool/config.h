@@ -6,14 +6,7 @@
 #define BMP_STARTUI_PATH L"pic\\start_ui.bmp"
 #define BMP_BG_PATH L"pic\\bg.bmp"
 #define BMP_JET_PATH L"pic\\all_jet_action.bmp"
-//#define BMP_JET_PATH L"pic\\jet_action.bmp"
-//#define BMP_ENEMY_JET_PATH L"pic\\enemy_jet_action.bmp"
-//#define BMP_ENEMY_BOSS_JET_PATH L"pic\\boss_jet_action.bmp"
-//#define BMP_BULLET_PATH L"pic\\bullet.bmp"
 #define BMP_ALL_BULLET_PATH L"pic\\all_bullet.bmp"
-//#define BMP_FIRE_BULLET_PATH L"pic\\fire_bullet_all.bmp"
-//#define BMP_ENEMY_BULLET_PATH L"pic\\enemy_bullet.bmp"
-//#define BMP_BAOZHA_PATH L"pic\\baozha.bmp"
 //开场
 #define BMP_START "startui"
 #define KEY_BLACK_START "startui_black"
@@ -24,14 +17,11 @@
 #define BMP_BG "background"
 #define KEY_BG "bg"
 //爆炸
-//#define BMP_BAOZHA "baozha"
 #define KEY_BAOZHA_ONE "baozh_one"
 #define KEY_BAOZHA_TWO "baozh_two"
 #define KEY_BAOZHA_THERE "baozh_there"
 //飞机
 #define BMP_JET "jet_action"
-//#define BMP_ENEMY_JET "jet_enemy_action"
-//#define BMP_BOSS_ENEMY_JET "jet_boss_enemy_action"
 #define KEY_MY_JET_IDOL "my_jet_idol"
 #define KEY_MY_JET_LEFT "my_jet_left"
 #define KEY_MY_JET_RIGHT "my_jet_right"
@@ -41,8 +31,6 @@
 #define KEY_ENEMY_BOSS_JET_CLOSE "enemy_boss_jet_close"
 //子弹
 #define BMP_BULLET "bullet"
-//#define BMP_FIRE_BULLET "fire_bullet"
-//#define BMP_ENEMY_BULLET "enemy_bullet"
 #define KEY_MY_BULLET_ONE_BG "bullet_my_one"
 #define KEY_MY_BULLET_TWO_BG "bullet_my_two"
 #define KEY_MY_BULLET_TWO_SMALL_BG "bullet_my_two_small"

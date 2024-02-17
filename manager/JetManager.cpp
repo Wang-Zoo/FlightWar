@@ -18,7 +18,7 @@ void CJETMANAGER::setBA(CBulletAction* ba)
 	this->mBA = ba;
 }
 
-bool CJETMANAGER::collision(CRect* bulletP,bool isEnemy)
+bool CJETMANAGER::collision(CMyRect* bulletP,bool isEnemy)
 {
 	for (auto temp : jets)
 	{
