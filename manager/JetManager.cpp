@@ -28,6 +28,12 @@ bool CJETMANAGER::collision(CRect* bulletP,bool isEnemy)
 		if (dynamic_cast<CMyJet*>(temp)&&!isEnemy) {
 			continue;
 		}
+		if (dynamic_cast<EnemyJetNumOne*>(temp) && isEnemy) {
+			continue;
+		}
+		if (dynamic_cast<EnemyJetBoss*>(temp) && isEnemy) {
+			continue;
+		}
 
 		bool collision = temp->collision(bulletP);
 		if (collision) {
@@ -54,7 +60,7 @@ void CJETMANAGER::AddNormalEnemy()
 		}
 	}
 	if (normalEnemy == 0) {
-		if (normalEenmyCount > 0&& startX<100) {
+		if (normalEenmyCount > 0&& startX<=100) {
 			normalEenmyCount--;
 			startX = 500;
 		}
@@ -63,7 +69,7 @@ void CJETMANAGER::AddNormalEnemy()
 	if (startX > 100 && curTime - lastAddNewEnemyTime > 1000) {
 		lastAddNewEnemyTime = curTime;
 		Add(new EnemyJetNumOne(mBA, startX));
-		startX -= 150;
+		startX -= 100;
 	}
 }
 

@@ -167,7 +167,7 @@ void EnemyJetNumOne::aiVerMove()
 		unsigned long long curTime = GetTickCount64();
 		if (curTime - lastAttckTime > 2000) {
 			lastAttckTime = curTime;
-			//mBulletAction->Add(new EnemyJetBullet(mX, mY+ ENEMY_JET_HEIGHT));
+			mBulletAction->Add(new EnemyJetBullet(mX, mY+ ENEMY_JET_HEIGHT));
 		}
 	}
 	else {
