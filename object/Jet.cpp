@@ -165,7 +165,7 @@ void EnemyJetNumOne::aiVerMove()
 			mY = 200;
 		}
 		unsigned long long curTime = GetTickCount64();
-		if (curTime - lastAttckTime > 2000) {
+		if (curTime - lastAttckTime > 4000) {
 			lastAttckTime = curTime;
 			mBulletAction->Add(new EnemyJetBullet(mX, mY+ ENEMY_JET_HEIGHT));
 		}
@@ -192,12 +192,12 @@ EnemyJetNumOne::EnemyJetNumOne(CBulletAction* ba,int offsetX) :CJet(ba,offsetX,0
 	}
 
 	{
-		CPOS pos(offsetX, 400);
+		CPOS pos(offsetX, 200);
 		path.add(pos);
 	}
 
 	{
-		CPOS pos(offsetX + 50, 400);
+		CPOS pos(offsetX + 50, 200);
 		path.add(pos);
 	}
 
