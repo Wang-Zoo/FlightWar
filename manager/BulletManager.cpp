@@ -17,6 +17,7 @@ void CBUllETMANAGER::Init()
 
 bool CBUllETMANAGER::Run()
 {
+	//子弹与飞机的碰撞
 	for (auto temp:bullets)
 	{
 		if (temp->isDead()) {
@@ -26,6 +27,27 @@ bool CBUllETMANAGER::Run()
 		bool collision = mJP->collision(temp->getRectP(),!isAllen, dynamic_cast<MyJetBulletNumTwo*>(temp)?0.01f:1.0f);
 		if (collision&& !dynamic_cast<MyJetBulletNumTwo*>(temp)) {
 			temp->dead();
+		}
+	}
+	//子弹与子弹的碰撞
+	for (size_t i = 0; i < bullets.size(); i++)
+	{
+		CBASEBULLET* temp = bullets[i];
+		if (temp->isDead()) {
+			continue;
+		}
+		for (size_t j = i+1; j < bullets.size(); j++)
+		{
+			CBASEBULLET* target = bullets[j];
+			if (target->isDead()) {
+				continue;
+			}
+			bool collision = temp->getRectP()->Collision(target->getRectP());
+			if (collision) {
+				temp->dead();
+				target->dead();
+				break;
+			}
 		}
 	}
 	auto it = bullets.begin();
