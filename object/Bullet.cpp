@@ -27,6 +27,11 @@ void CBASEBULLET::dead()
 	isDeaded = true;
 }
 
+bool CBASEBULLET::canDestory()
+{
+	return isDeaded&& mBZ.finish();
+}
+
 CMyRect* CBASEBULLET::getRectP()
 {
 	return &mRect;
@@ -45,6 +50,7 @@ void MyJetBulletNumOne::Init()
 void MyJetBulletNumOne::Run()
 {
 	if (isDeaded) {
+		mBZ.show((int)mX, (int)mY, MY_BULLET_NUM_ONE_WIDTH, MY_BULLET_NUM_ONE_WIDTH);
 		return;
 	}
 	COutput::getInstance()->Draw(KEY_MY_BULLET_ONE_BG, (int)mX, (int)mY);
@@ -134,6 +140,10 @@ void EnemyJetBullet::Init()
 
 void EnemyJetBullet::Run()
 {
+	if (isDeaded) {
+		mBZ.show((int)mX, (int)mY, ENEMY_BULLET_WIDTH, ENEMY_BULLET_HEIGHT);
+		return;
+	}
 	unsigned long long curTime = GetTickCount64();
 	if (curTime - lastTime > 5) {
 		lastTime = curTime;
@@ -165,6 +175,10 @@ void EnemyBossJetBullet::Init()
 
 void EnemyBossJetBullet::Run()
 {
+	if (isDeaded) {
+		mBZ.show((int)mX, (int)mY, ENEMY_BOSS_BULLET_WIDTH, ENEMY_BOSS_BULLET_WIDTH);
+		return;
+	}
 	mY+=0.1f;
 	if (mY > _CLIENT_H - ENEMY_BOSS_BULLET_HEIGHT) {
 		isDeaded = true;

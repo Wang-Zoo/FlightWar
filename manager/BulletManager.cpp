@@ -31,7 +31,7 @@ bool CBUllETMANAGER::Run()
 	auto it = bullets.begin();
 	for (;it!=bullets.end();)
 	{
-		if ((*it)->isDead()) {
+		if ((*it)->canDestory()) {
 			delete(*it);
 			it = bullets.erase(it);
 		}

@@ -1,5 +1,6 @@
 #pragma once
 #include "Rect.h"
+#include "baozha.h"
 class CBASEBULLET
 {
 public:
@@ -10,8 +11,10 @@ public:
 	virtual void End() = 0;
 	bool isDead();
 	void dead();
+	bool canDestory();
 	CMyRect* getRectP();
 protected:
+	CBZ mBZ;
 	CMyRect mRect;
 	float mX;
 	float mY;

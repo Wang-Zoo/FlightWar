@@ -8,6 +8,7 @@ CBZ::CBZ()
 	COutput::getInstance()->AddPic(BMP_JET, KEY_BAOZHA_TWO, 76, 156, BZ_WIDTH, BZ_HEIGHT, RGB(13, 237, 13));
 	COutput::getInstance()->AddPic(BMP_JET, KEY_BAOZHA_THERE, 132, 156, BZ_WIDTH, BZ_HEIGHT, RGB(13, 237, 13));
 	index = 0;
+	lastTime = 0l;
 }
 
 CBZ::~CBZ()
